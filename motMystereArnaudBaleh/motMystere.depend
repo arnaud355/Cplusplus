@@ -1,0 +1,21 @@
+# depslib dependency file v1.0
+1513372744 source:c:\users\arnaud\desktop\projetsc++\motmystere\main.cpp
+	<iostream>
+	<string>
+	<fstream>
+	<ctime>
+	<cstdlib>
+	<vector>
+	"fonctions.h"
+
+1513372516 source:c:\users\arnaud\desktop\projetsc++\motmystere\fonctions.cpp
+	<iostream>
+	<string>
+	<fstream>
+	<ctime>
+	<cstdlib>
+	<vector>
+	"fonctions.h"
+
+1513372192 c:\users\arnaud\desktop\projetsc++\motmystere\fonctions.h
+

@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1515347070 source:c:\users\arnaud\desktop\projetsc++\zfractions\main.cpp
+	<iostream>
+	<cmath>
+	"Zfractions.h"
+
+1515612689 c:\users\arnaud\desktop\projetsc++\zfractions\zfractions.h
+	<iostream>
+

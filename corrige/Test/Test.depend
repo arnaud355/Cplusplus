@@ -1,0 +1,25 @@
+# depslib dependency file v1.0
+1513255583 source:c:\users\aster\desktop\c++\test\math.cpp
+	"math.h"
+
+1513255583 c:\users\aster\desktop\c++\test\math.h
+
+1513324590 source:c:\users\aster\desktop\c++\test\main.cpp
+	<iostream>
+	<fstream>
+	<string>
+	<ctime>
+	<cstdlib>
+
+1513374221 source:c:\users\arnaud\desktop\projetsc++\corrige\test\main.cpp
+	<iostream>
+	<fstream>
+	<string>
+	<ctime>
+	<cstdlib>
+
+1513374221 source:c:\users\arnaud\desktop\projetsc++\corrige\test\math.cpp
+	"math.h"
+
+1513374221 c:\users\arnaud\desktop\projetsc++\corrige\test\math.h
+

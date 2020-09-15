@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1513279618 source:c:\users\arnaud\desktop\projetsc++\essais\main.cpp
+	<iostream>
+	<string>
+	<fstream>
+	<ctime>
+	<cstdlib>
+	<vector>
+

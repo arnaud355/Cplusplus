@@ -1,0 +1,21 @@
+# depslib dependency file v1.0
+1513972882 source:c:\users\arnaud\desktop\projetsc++\class\armes.cpp
+	"armes.h"
+
+1513973007 c:\users\arnaud\desktop\projetsc++\class\armes.h
+	<iostream>
+	<string>
+
+1514575286 source:c:\users\arnaud\desktop\projetsc++\class\main.cpp
+	<iostream>
+	<string>
+	"personnages.h"
+
+1514574719 c:\users\arnaud\desktop\projetsc++\class\personnages.h
+	"armes.h"
+	<iostream>
+	<string>
+
+1514574719 source:c:\users\arnaud\desktop\projetsc++\class\personnages.cpp
+	"personnages.h"
+

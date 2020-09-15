@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1513293050 source:c:\users\arnaud\desktop\projetsc++\fichier2\main.cpp
+	<iostream>
+	<fstream>
+	<string>
+	<limits>
+

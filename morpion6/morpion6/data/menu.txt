@@ -1,0 +1,17 @@
+data/menu.bmp
+data/titre.bmp
+20 30
+data/nouveau.bmp
+25 227
+data/quitter.bmp
+412 490
+data/txtj1.bmp
+460 250
+data/txtj2.bmp
+60 400
+data/hum.bmp
+data/fac.bmp
+data/moy.bmp
+data/dif.bmp
+600 250
+230 400

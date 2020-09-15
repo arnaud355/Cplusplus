@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1516149677 source:c:\users\arnaud\desktop\projetsc++\zfractioncorrection\main.cpp
+	<iostream>
+	<cmath>
+	"ZFraction.h"
+
+1516149610 c:\users\arnaud\desktop\projetsc++\zfractioncorrection\zfraction.h
+	<iostream>
+
+1516149857 source:c:\users\arnaud\desktop\projetsc++\zfractioncorrection\zfraction.cpp
+	"ZFraction.h"
+	<cmath>
+

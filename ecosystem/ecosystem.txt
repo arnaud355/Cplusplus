@@ -1,0 +1,61 @@
+monde reproduit en 2D avec carreaux de pixels:
+les carreaux sont des espèces animales et l'homme (préhistoire)
+les espèces sont reprsentés au moyen de carrés de différentes couleurs
+et on le comportement qui va avec.
+
+les animaux et hommes ont une jauge de faim et une jauge de soif qui
+diminue de 2 toutes les secondes, lorsqu'ils boivent ou mangent
+ils récupèrent +5 soit de faim ou soif.
+l'espèrence de vie est de 120 s en moyenne
+toute les 30 s il ya une periode reproduction, de 30 s,
+les animaux se reproduise et donne naissance à des petits
+(petit carre, puis carre moyen (ado), puis carre normaux)
+
+class elementNature : eau, vegetation, montagne {
+	methode : ras
+
+	attribut par carre :
+
+	quantite: 50 
+
+ }
+
+class virtuel animaux {
+	methodes:
+
+	seDeplacer()
+	courir()
+	manger_boire()
+
+  	attribut:
+
+	esperanceVie
+	tempsDeVie: nb alea
+	nivDeVie : 100
+	jaugeFaim : 100
+	jaugeSoif : 100 
+	force : 
+	vitesse :
+	endurance :	
+} 
+
+class virtuel carnivore, herite d'animaux {
+	methodes:
+
+	attaquer()
+	fuir()
+
+  	attribut:
+
+		
+} 
+
+class virtuel herbivore herite d'animaux {
+	methodes:
+
+	fuir()
+
+  	attribut:
+
+		
+} 

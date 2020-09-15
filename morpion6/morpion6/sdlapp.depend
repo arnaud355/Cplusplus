@@ -1,0 +1,75 @@
+# depslib dependency file v1.0
+1142241410 c:\documents and settings\zeroc\mes documents\tutoriel\ver2\moteur.cpp
+	"Moteur.h"
+
+1142240335 c:\documents and settings\zeroc\mes documents\tutoriel\ver2\moteur.h
+	"Define.h"
+
+1142960689 c:\documents and settings\zeroc\mes documents\tutoriel\ver2\define.h
+	<SDL.h>
+	<iostream>
+
+1143143091 c:\documents and settings\zeroc\mes documents\tutoriel\ver2\jeu.cpp
+	"Jeu.h"
+
+1143141612 c:\documents and settings\zeroc\mes documents\tutoriel\ver2\jeu.h
+	"Define.h"
+
+1146307628 c:\documents and settings\zeroc\bureau\morpion6\morpion6\jeu.cpp
+	"Jeu.h"
+
+1146307628 c:\documents and settings\zeroc\bureau\morpion6\morpion6\jeu.h
+	<fstream>
+	"Define.h"
+	"Objet.h"
+
+1146307628 c:\documents and settings\zeroc\bureau\morpion6\morpion6\define.h
+	<SDL.h>
+	<iostream>
+	<string>
+
+1146307628 c:\documents and settings\zeroc\bureau\morpion6\morpion6\objet.h
+	<vector>
+	"Define.h"
+
+1147018009 c:\documents and settings\zeroc\bureau\morpion6\morpion6\main.cpp
+	"Main.h"
+	"Moteur.h"
+
+1146307628 c:\documents and settings\zeroc\bureau\morpion6\morpion6\main.h
+	"Define.h"
+
+1146307628 c:\documents and settings\zeroc\bureau\morpion6\morpion6\moteur.h
+	<fstream>
+	"Define.h"
+	"Jeu.h"
+	"Menu.h"
+	"IA.h"
+
+1146307628 c:\documents and settings\zeroc\bureau\morpion6\morpion6\menu.h
+	"Define.h"
+	"Moteur.h"
+
+1146307628 c:\documents and settings\zeroc\bureau\morpion6\morpion6\ia.h
+	"Jeu.h"
+	"Rand.h"
+
+1146307628 c:\documents and settings\zeroc\bureau\morpion6\morpion6\rand.h
+	<stdlib.h>
+	<time.h>
+
+1147018087 c:\documents and settings\zeroc\bureau\morpion6\morpion6\menu.cpp
+	"Menu.h"
+
+1146307628 c:\documents and settings\zeroc\bureau\morpion6\morpion6\objet.cpp
+	"Objet.h"
+
+1146307628 c:\documents and settings\zeroc\bureau\morpion6\morpion6\rand.cpp
+	"Rand.h"
+
+1146304000 c:\documents and settings\zeroc\bureau\morpion6\morpion6\ia.cpp
+	"IA.h"
+
+1147018066 c:\documents and settings\zeroc\bureau\morpion6\morpion6\moteur.cpp
+	"Moteur.h"
+

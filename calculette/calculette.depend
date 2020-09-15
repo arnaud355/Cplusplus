@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1512589837 source:c:\users\arnaud\desktop\projetsc++\calculette\caculs.cpp
+	<iostream>
+
+1512589961 source:c:\users\arnaud\desktop\projetsc++\calculette\main.cpp
+	<iostream>
+

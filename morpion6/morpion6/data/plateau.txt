@@ -1,0 +1,16 @@
+data/bg.bmp
+data/vide.bmp
+data/o.bmp
+data/x.bmp
+data/gagneo.bmp
+data/gagnex.bmp
+150 150
+93 25 
+368 35
+628 42
+53 225
+328 235
+588 242
+93 425
+368 435
+628 442
