@@ -2,13 +2,22 @@ Utiliser un pointer :
 
 int *pNumber = nullptr; //ou int *pNumber = {nullptr}; permet de pointer sur null
 
-pNumber = new int{77}; //allocation dynamique dans le heap ( mémoire disponible pour le programme et non utilisé)
+pNumber = {new int(77)}; //allocation dynamique dans le heap ( mémoire disponible pour le programme et non utilisé)
 
 // ou bien on ecrit dans la mémoire allouée la valeur : *pNumber = 77;
+
+/////// style classique pour créer pointer
+int number = 88;     // An int variable with a value
+int * pNumber;       // Declare a pointer variable called pNumber pointing to an int (or int pointer)
+pNumber = &number;
+///////
 
 //check for null value
 if(pNumber != nullptr){
    std::cout << "*pNumber : " << *pNumber << std::endl;
+}
+else {
+   std::cout << "Ivalid adress" << std::endl;
 }
 
 ...
