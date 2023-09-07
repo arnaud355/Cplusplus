@@ -2,9 +2,14 @@ Utiliser un pointer :
 
 int *pNumber = nullptr; //ou int *pNumber = {nullptr}; permet de pointer sur null
 
-pNumber = new int; //allocation dynamique dans le heap ( mémoire disponible pour le programme et non utilisé)
+pNumber = new int{77}; //allocation dynamique dans le heap ( mémoire disponible pour le programme et non utilisé)
 
-*pNumber = 77; // on ecrit dans la mémoire allouée la valeur
+// ou bien on ecrit dans la mémoire allouée la valeur : *pNumber = 77;
+
+//check for null value
+if(pNumber != nullptr){
+   std::cout << "*pNumber : " << *pNumber << std::endl;
+}
 
 ...
 
@@ -12,7 +17,12 @@ delete pNumber; // supression et on rend mémoire à l'os
 
 pNumber = nullptr; // bonne pratique de le faire pointer sur null, améliore la sécurité
 
-**********
+
+****************************************************************
+Class
+
+
+****************************************************************
 Default arguments and virtual function in C++
 
 #include<iostream>
