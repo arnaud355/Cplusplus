@@ -11,3 +11,26 @@ pNumber = new int; //allocation dynamique dans le heap ( mémoire disponible pou
 delete pNumber; // supression et on rend mémoire à l'os
 
 pNumber = nullptr; // bonne pratique de le faire pointer sur null, améliore la sécurité
+
+**********
+Default arguments and virtual function in C++
+
+#include<iostream>
+using namespace std;
+class B {
+   public:
+      virtual void s(int a = 0) {
+         cout<<" In Base \n";
+      }
+};
+class D: public B {
+   public:
+      virtual void s(int a) {
+         cout<<"In Derived, a="<<a;
+      }
+};
+int main(void) {
+   D d; // An object of class D
+   B *b= &d;// A pointer of type B* pointing to d
+   b->s();// prints"D::s() called"
+   return 0;
