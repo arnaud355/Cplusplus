@@ -66,6 +66,11 @@ class Dog
       Dog(string_view name_param, string_view breed_param, int age_param);
       ~Dog(); //Destructor déclaré
 
+      //Setters
+      void SetDogName(string_view name_param)
+      {
+         dog_name = name_param;
+      }
       void some_func();
       ...
 
@@ -91,7 +96,7 @@ Dog::Dog(string_view name_param, string_view breed_param, int age_param) {
    dog_breed = breed_param;
    dog_age = new int; // Memory allocated on the heap
    *dog_age = age_param;
-   cout << "Dog constructor called for " << dog_name << endl; 
+   cout << "Dog constructor called for " << dog_name << "at " << this << endl; 
 }
 
 void Dog::Some_func()
@@ -119,7 +124,7 @@ programme.
  Dog::~Dog()
       {
          delete dog_age; // Release memory
-         cout << "Dog destructor called for " << dog_name << endl; 
+         cout << "Dog destructor called for " << dog_name << "at " << this << endl;endl; 
       }
 
 main.cpp :
