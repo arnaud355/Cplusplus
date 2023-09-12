@@ -63,9 +63,10 @@ class Dog
 {
    public:
       Dog() = Default;
-      Dog(string name_param, string breed_param, int age_param);
+      Dog(string_view name_param, string_view breed_param, int age_param);
       ~Dog(); //Destructor déclaré
 
+      void some_func();
       ...
 
       private:
@@ -85,12 +86,35 @@ Dog::Dog() {
    *dog_age = 0;
 }
 
-Dog::Dog(string name_param, string breed_param, int age_param) {
+Dog::Dog(string_view name_param, string_view breed_param, int age_param) {
    dog_name = name_param;
    dog_breed = breed_param;
    dog_age = new int; // Memory allocated on the heap
    *dog_age = age_param;
    cout << "Dog constructor called for " << dog_name << endl; 
+}
+
+void Dog::Some_func()
+{
+   Dog *p_dog = new Dog("Medor","Labrador",2);
+   delete p_dog; // Causes for the destructor of Dog to be called
+
+//Pourquoi pas :
+// main.cpp : 
+//     Dog myDog("Medor","Labrador",2);
+//     Some_func(myDog);
+// dog.cpp
+      Some_func(Dog dog)
+      {
+         
+      }
+// En passant par copie l'objet dog de la classe Dog, je fais une copie des valeurs, y compris
+une copie de l'adresse du pointeur *dog_age. à la fin de la fonction mon objet dog est détruit.
+à la fin de la fonction du main, mon objet passé en copie est supprimé également.
+Conséquence, je supprime 2 fois un pointeur pointant sur la même adresse, cela cause crash du
+programme.
+
+
 }
  Dog::~Dog()
       {
@@ -101,6 +125,15 @@ Dog::Dog(string name_param, string breed_param, int age_param) {
 main.cpp :
 
 Dog myDog("Medor","Labrador",2);
+// Le destruteur est appelé automatiquement : 
+- When an object is passed by value to a function.
+- When a local object is returned from a function
+- When a local stack object goes out of scope (dies)
+- When a heap object is released with delete
+
+each class member function contain a hidden pointer called this. That pointer contains the
+address of the current object, for which  the method is being executed. This also applies
+to constructors and destructors.
 
 
 ****************************************************************
