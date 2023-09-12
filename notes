@@ -67,35 +67,37 @@ class Dog
       ~Dog(); //Destructor déclaré
 
       //Setters
-      void SetDogName(string_view name_param)
-      {
-         dog_name = name_param;
-      }
+      void SetDogName(string_view name);
+
+      void setDogBreed(string_view breed);
+
+      void setDogAge(int age);
+
       void some_func();
       ...
 
       private:
-         string dog_name;
-         string dog_breed;
-         int *dog_age{nullptr};   
-}
+         string name;
+         string breed;
+         int *p_age{nullptr};   
+};
 #endif
 
 dog.cpp :
 #include "dog.h"
 
 Dog::Dog() {
-   dog_name = "None";
-   dog_breed = "None";
-   dog_age = new int; // Dynamic memory allocation
-   *dog_age = 0;
+   name = "None";
+   breed = "None";
+   p_age = new int; // Dynamic memory allocation
+   *p_age = 0;
 }
 
 Dog::Dog(string_view name_param, string_view breed_param, int age_param) {
-   dog_name = name_param;
-   dog_breed = breed_param;
-   dog_age = new int; // Memory allocated on the heap
-   *dog_age = age_param;
+   name = name_param;
+   breed = breed_param;
+   p_age = new int; // Memory allocated on the heap
+   *p_age = age_param;
    cout << "Dog constructor called for " << dog_name << "at " << this << endl; 
 }
 
@@ -121,6 +123,26 @@ programme.
 
 
 }
+//Setters
+      void SetDogName(string_view name)
+      {
+         //On met son pointeur caché devant l'adresse qui référence le name de l'instance
+         //pour éviter la confusion avec le name crée temporairement, de la méthod.
+         this->name = name;
+      }
+
+      void setDogBreed(string_view breed)
+      {
+         this->breed = breed;
+      }
+
+      void setDogAge(int age)
+      {
+         //p_age est déjà un pointeur qui contient une adresse, on veut accéder à la valeur qu'il
+         //contient pour y affecter age à la place, on ajoute etoile pour accéder à la valeur
+         *(this->p_age) = age;
+      }
+
  Dog::~Dog()
       {
          delete dog_age; // Release memory
@@ -130,6 +152,9 @@ programme.
 main.cpp :
 
 Dog myDog("Medor","Labrador",2);
+
+
+
 // Le destruteur est appelé automatiquement : 
 - When an object is passed by value to a function.
 - When a local object is returned from a function
