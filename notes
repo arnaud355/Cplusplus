@@ -29,7 +29,60 @@ pNumber = nullptr; // bonne pratique de le faire pointer sur null, améliore la 
 
 ****************************************************************
 Class
+Voir rpgCorrections pour l'organisation fichiers.
 
+int main() {
+
+   Cylinder cylinder1(10,10);
+
+   cylinder1.volume();
+
+   // Managing a stack object through pointers (contient juste l'adresse, pas l'objet contruit)
+   Cylinder *p_cylinder1 = &cylinder1
+
+   // Acces à une methode de l'objet de 2 manieres possible, la 2eme à privilégier :
+   cout << "Volume : " << (*p_cylinder1).volume(); << endl;
+   cout << "Volume : " << p_cylinder1->volume(); << endl;
+
+   // Create cylinder heap objet through the new operator (contient une nouvelle adresse avec création d'objet)
+   Cylinder *p_cylinder2 = new Cylinder(100,2); // Comme s'est créee sur le heap ne pas oublier de le supprimer
+
+   cout << "Volume cylinder2: " << p_cylinder2->volume(); << endl;
+
+   // Ne pas oublier de toujours supprimer le pointeur afin de libérer l'adresse
+   delete p_cylinder2;
+   p_cylinder2 = nullptr;
+}
+
+class syntax :
+dog.h :
+#ifndef DOG_H
+   #define DOG_H
+
+class Dog
+{
+   public:
+      Dog();
+      Dog(string name_param, string breed_param, int age_param);
+      ~Dog(); //Destructor déclaré
+            //Can also declare and implement in here:
+      ~Dog()
+         {
+            delete dog_age;
+            cout << "Dog destructor called for " << dog_name << endl; 
+         }
+
+      ...
+
+      private:
+         string dog_name;
+         string dog_breed;
+         int *dog_age;
+   
+}
+#endif
+
+dog.cpp :
 
 ****************************************************************
 Default arguments and virtual function in C++
