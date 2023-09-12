@@ -57,7 +57,7 @@ int main() {
 class syntax :
 dog.h :
 #ifndef DOG_H
-   #define DOG_H
+#define DOG_H
 
 class Dog
 {
@@ -77,12 +77,32 @@ class Dog
       private:
          string dog_name;
          string dog_breed;
-         int *dog_age;
-   
+         int *dog_age;   
 }
 #endif
 
 dog.cpp :
+#include "dog.h"
+
+Dog::Dog() {
+   dog_name = "None";
+   dog_breed = "None";
+   dog_age = new int; // Dynamic memory allocation
+   *dog_age = 0;
+}
+
+Dog::Dog(string name_param, string breed_param, int age_param) {
+   dog_name = name_param;
+   dog_breed = breed_param;
+   dog_age = new int; // Memory allocated on the heap
+   *dog_age = age_param;
+}
+ Dog::~Dog()
+      {
+         delete dog_age; // Release memory
+         cout << "Dog destructor called for " << dog_name << endl; 
+      }
+
 
 ****************************************************************
 Default arguments and virtual function in C++
