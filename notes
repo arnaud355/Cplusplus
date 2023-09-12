@@ -77,7 +77,7 @@ class Dog
       private:
          string dog_name;
          string dog_breed;
-         int *dog_age;   
+         int *dog_age{nullptr};   
 }
 #endif
 
