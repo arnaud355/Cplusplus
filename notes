@@ -62,7 +62,7 @@ dog.h :
 class Dog
 {
    public:
-      Dog();
+      Dog() = Default;
       Dog(string name_param, string breed_param, int age_param);
       ~Dog(); //Destructor déclaré
             //Can also declare and implement in here:
@@ -96,12 +96,17 @@ Dog::Dog(string name_param, string breed_param, int age_param) {
    dog_breed = breed_param;
    dog_age = new int; // Memory allocated on the heap
    *dog_age = age_param;
+   cout << "Dog constructor called for " << dog_name << endl; 
 }
  Dog::~Dog()
       {
          delete dog_age; // Release memory
          cout << "Dog destructor called for " << dog_name << endl; 
       }
+
+main.cpp :
+
+Dog myDog("Medor","Labrador",2);
 
 
 ****************************************************************
