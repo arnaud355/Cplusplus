@@ -65,12 +65,6 @@ class Dog
       Dog() = Default;
       Dog(string name_param, string breed_param, int age_param);
       ~Dog(); //Destructor déclaré
-            //Can also declare and implement in here:
-      ~Dog()
-         {
-            delete dog_age;
-            cout << "Dog destructor called for " << dog_name << endl; 
-         }
 
       ...
 
