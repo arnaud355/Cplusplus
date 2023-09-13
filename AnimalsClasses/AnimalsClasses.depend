@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1694530739 source:c:\users\arnau\documents\cpp\animalsclasses\main.cpp
+	<iostream>
+	<string>
+	"dog.h"
+
+1694530739 c:\users\arnau\documents\cpp\animalsclasses\dog.h
+	<iostream>
+	<string>
+
+1694530688 source:c:\users\arnau\documents\cpp\animalsclasses\dog.cpp
+	"dog.h"
+
