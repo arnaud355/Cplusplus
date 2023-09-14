@@ -1,0 +1,21 @@
+# depslib dependency file v1.0
+1694599629 source:c:\users\arnau\documents\cpp\personclass\main.cpp
+	<iostream>
+	"player.h"
+
+1694599453 c:\users\arnau\documents\cpp\personclass\player.h
+	<iostream>
+	<string>
+	"person.h"
+
+1694599542 c:\users\arnau\documents\cpp\personclass\person.h
+	<iostream>
+	<string>
+
+1694599888 source:c:\users\arnau\documents\cpp\personclass\person.cpp
+	"person.h"
+
+1694599587 source:c:\users\arnau\documents\cpp\personclass\player.cpp
+	"person.h"
+	"player.h"
+
