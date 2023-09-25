@@ -1,0 +1,14 @@
+# depslib dependency file v1.0
+1695657316 source:c:\users\arnau\documents\cpp\dsa\vector\vector1\main.cpp
+	<iostream>
+	"vector.h"
+
+1695656533 c:\users\arnau\documents\cpp\dsa\vector\vector1\vector.h
+	<iostream>
+
+1695657500 source:c:\users\arnau\documents\cpp\dsa\vector\vector1\vector.cpp
+	"vector.h"
+	<assert.h>
+	<iostream>
+	<utility>
+
