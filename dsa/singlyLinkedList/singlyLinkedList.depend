@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1695906916 source:c:\users\arnau\documents\cpp\dsa\singlylinkedlist\main.cpp
+	<iostream>
+	"struct.h"
+
+1696002232 c:\users\arnau\documents\cpp\dsa\singlylinkedlist\struct.h
+
+1695898900 source:c:\users\arnau\documents\cpp\dsa\singlylinkedlist\singlylinkedlist.cpp
+	<iostream>
+	"struct.h"
+
