@@ -27,6 +27,7 @@ int main()
     node1->prev = nullptr; //3-4 link
 
     print1(node1);
+    reversePrint1(node4);
     printNodeF(node1);
     cout << "***************" << endl;
     printNodeFReversed(node4);
@@ -37,5 +38,30 @@ int main()
 
     //cout << sizeof(node1) << endl;
 
+    LinkedList linkedlist;
+    linkedlist.print();
+    cout << "taille liste : " << linkedlist.getLength() << endl;
+    linkedlist.insert_end(7);
+    linkedlist.insert_end(9);
+    linkedlist.insert_end(10);
+    linkedlist.print();
+    linkedlist.insert_end(12);
+    cout << "***************" << endl;
+    linkedlist.print();
+    cout << "taille liste : " << linkedlist.getLength() << endl;
+    //linkedlist.delete_end();
+    linkedlist.insert_end(11);
+    linkedlist.print();
+    cout << "taille liste : " << linkedlist.getLength() << endl;
+
+    Node* nodeGetNth = linkedlist.get_nth(3);
+    cout << "get nth : " << nodeGetNth->m_data << endl;
+    cout << "search item : " << linkedlist.searchItem(9) << endl;
+    cout << "search item : " << linkedlist.searchItem(15) << endl;
+    cout << "search item improved : " << linkedlist.searchItemImproved(10) << endl;
+
+    linkedlist.insert_value(8, 2);
+    linkedlist.print();
+    cout << "taille liste : " << linkedlist.getLength() << endl;
     return 0;
 }
