@@ -1,10 +1,21 @@
 #include <iostream>
 #include "struct.h"
+#include <cassert>
+#include <sstream>
+#include <iostream>
+#include <vector>
+#include <algorithm>
 
 LinkedList::LinkedList(): head(nullptr), tail(nullptr) {
     // Constructor implementation
     // Initialize variables or perform necessary setup
 }
+
+//Prevent pass linked list without &
+//LinkedList::LinkedList(const LinkedList&) = delete;
+
+//Prevent return linked list from function
+//LinkedList::LinkedList &operator=(const LinkedList &another) = delete;
 
 LinkedList::~LinkedList() {
     // Destructor implementation
@@ -36,6 +47,8 @@ void LinkedList::insert_end(int value){
     if(head == nullptr){
         head = newNode;
         tail = newNode;
+        head->next = tail;
+        tail->prev = head;
         length++;
     }
     else {
@@ -44,6 +57,22 @@ void LinkedList::insert_end(int value){
         tail = newNode;
         length++;
     }
+}
+
+void LinkedList::insert_front(int value){
+    Node* newNode = new Node(value);
+    if(head != nullptr){
+        newNode->next = head;
+        head->prev = newNode;
+        head = newNode;
+        length++;
+    }
+    else{
+        head = newNode;
+        tail = newNode;
+        length++;
+    }
+
 }
 
 void LinkedList::insert_value(int value, int pos){
@@ -69,21 +98,36 @@ void LinkedList::delete_end(){
             tempNode->next = nullptr;
             tail = tempNode;
             length--;
-            break;
         }
         tempNode = tempNode->next;
     }
 }
 
-Node* LinkedList::getHead(){
+void LinkedList::delete_front(){
+    if(head != nullptr){
+        if(head == tail){
+            head = nullptr;
+            tail = nullptr;
+            length--;
+        }
+        else{
+            head->next->prev = nullptr;
+            head = head->next;
+            length--;
+        }
+    }
+}
+//If getHead() is a member function that is not declared as const, it cannot be called
+//on a const object (like the other parameter, which is a const LinkedList&).
+Node* LinkedList::getHead() const {
     return head;
 }
 
-Node* LinkedList::getTail(){
+Node* LinkedList::getTail() const {
     return tail;
 }
 
-int LinkedList::getLength (){
+int LinkedList::getLength () const {
     return length;
 }
 
@@ -97,6 +141,19 @@ Node* LinkedList::get_nth(int n){
     }
     return nullptr;
 }
+Node* LinkedList::get_nth_back(int n){
+    int idx = length - n;
+    int pos = length + 1;
+
+    for(Node* cur = tail; cur; cur = cur->prev){
+        pos--;
+        if(pos == idx){
+            return cur;
+        }
+    }
+    return nullptr;
+}
+
 int LinkedList::searchItem(int value){
     int pos = 0;
     for(Node* cur = head; cur; cur = cur->next){
@@ -149,38 +206,75 @@ int LinkedList::searchItemImproved(int value){
 }
 */
 
-void LinkedList::debugVerifyDataIntegrety(){
-    if(length == 0){
-        //avec assert si expression est fausse arret programme et message alerte
-        assert(head == nullptr);
-        assert(tail == nullptr);
-    }else{
-        assert(head != nullptr);
-        assert(tail != nullptr);
-        if(length == 1)
-            assert(head == tail);
-        else
-            assert(head != tail);
-        assert(!tail->next);
+bool LinkedList::isSame(const LinkedList& other){
+    // Adresse n as pas d intelligence, il faut une fleche pour pointer depuis l adresse.
+    // Avec une reference sur l adresse on peut utiliser le point.
+    if (this->getHead() == nullptr || other.getHead() == nullptr) {
+            return false;
+        }
+    bool same = true;
+    Node* nodeIndex = other.getHead();
+
+    for(Node* cur = this->getHead(); cur; cur = cur->next){
+        for(Node* cur2 = nodeIndex; cur2; cur2 = cur2->next){
+            if(cur->m_data != cur2->m_data){
+                same = false;
+                std::cout << "les 2 chaines ne sont pas les memes" << std::endl;
+                return false;
+            }
+            else{
+                nodeIndex = nodeIndex->next;
+                break;
+            }
+        }
     }
-    int len = 0;
-    for(Node* cur = head; cur; cur = cur->next, len++){
-        assert(len < 10000); // avoid circle list
+
+    if(same){
+        std::cout << "les 2 chaines sont les memes" << std::endl;
+        return true;
     }
-    assert(length == len);
-    assert(length == (int)debug_data.size());
+
+    std::cout << "les 2 chaines ne sont pas les memes" << std::endl;
+    return false;
 }
 
-std::string LinkedList::debugToString(){
-    if(length == 0)
-        return "";
-    std::ostringstream oss;
-    for(Node* cur = head; cur; cur = cur->next){
-        oss << cur->m_data;
-        if(cur->next)
-            oss << " ";
+bool LinkedList::isSameAndLength(const LinkedList& other){
+    // Adresse n as pas d intelligence, il faut une fleche pour pointer depuis l adresse.
+    // Avec une reference sur l adresse on peut utiliser le point.
+    if (this->getHead() == nullptr || other.getHead() == nullptr) {
+            return false;
+        }
+
+    if(this->getLength() == other.getLength()){
+        bool same = true;
+
+        Node* nodeIndex = other.getHead();
+
+        for(Node* cur = this->getHead(); cur; cur = cur->next){
+            for(Node* cur2 = nodeIndex; cur2; cur2 = cur2->next){
+                if(cur->m_data != cur2->m_data){
+                    same = false;
+                    std::cout << "les 2 chaines ne sont pas les memes" << std::endl;
+                    return false;
+                }
+                else{
+                    nodeIndex = nodeIndex->next;
+                    break;
+                }
+            }
+        }
+
+         if(same){
+            std::cout << "les 2 chaines sont les memes" << std::endl;
+            return true;
+        }
     }
-    return oss.str();
+    else{
+        std::cout << "Pas la meme longueur de liste" << std::endl;
+        return false;
+    }
+
+    return false;
 }
 
 void print1(Node* head){
@@ -259,3 +353,101 @@ Node* printNodeFReversed(Node* tail){
      tail = printNodeFReversed(tail->prev);
      return tail;
 }
+
+/*
+void LinkedList::debugVerifyDataIntegrety(){
+    if(length == 0){
+        //avec assert si expression est fausse arret programme et message alerte
+        assert(head == nullptr);
+        assert(tail == nullptr);
+    }else{
+        assert(head != nullptr);
+        assert(tail != nullptr);
+        if(length == 1)
+            assert(head == tail);
+        else
+            assert(head != tail);
+        assert(!tail->next);
+    }
+    int len = 0;
+    for(Node* cur = head; cur; cur = cur->next, len++){
+        assert(len < 10000); // avoid circle list
+    }
+    assert(length == len);
+    //assert(length == (int)debug_data.size());
+}
+
+std::string LinkedList::debugToString(){
+    if(length == 0)
+        return "";
+    std::ostringstream oss;
+    for(Node* cur = head; cur; cur = cur->next){
+        oss << cur->m_data;
+        if(cur->next)
+            oss << " ";
+    }
+    return oss.str();
+}
+
+void test1(){
+    std::cout << "\ntest1\n";
+    LinkedList listTest;
+    listTest.insert_end(1);
+    listTest.insert_end(2);
+    listTest.insert_end(3);
+    listTest.insert_end(4);
+
+    listTest.print();
+
+    std::string expected = "1 2 3 4";
+    std::string result = listTest.debugToString();
+    if(expected != result){
+        std::cout << "no match: expected : " << expected << "\nresult : " << result << "\n";
+        assert(false);
+    }
+    //listTest.debugPrintList("***********");
+}
+
+void LinkedList::debugPrintList(std::string msg = ""){
+    if(msg != "")
+        std::cout << msg << "\n";
+    for(int i = 0; i < (int)m_debug_data.size(); ++i)
+        //debugPrintNode(m_debug_data[i]);
+    std::cout << "*************\n" << std::flush;
+}
+void LinkedList::debugPrintNode(Node* node, bool isSeparate = false){
+    if(isSeparate)
+        std::cout << "Sep: ";
+    if(node == nullptr){
+        std::cout << "nullptr\n";
+        return;
+    }
+
+    std::cout << node->m_data << " ";
+    if(node->next == nullptr)
+        std::cout << "X ";
+    else
+        std::cout << node->next->m_data << " ";
+
+    if(node == head)
+        std::cout << "head\n";
+    else if(node == tail)
+        std::cout << "tail\n";
+    else
+        std::cout << "\n";
+}
+
+void LinkedList::debug_add_node(Node* node){
+    m_debug_data.push_back(node);
+}
+
+
+void LinkedList::debug_remove_node(Node* node){
+    auto it = std::find(m_debug_data.begin(), m_debug_data.end(), node);
+    if(it == m_debug_data.end())
+        std::cout << "Node does not exists\n";
+    else
+        m_debug_data.erase(it);
+}
+*/
+

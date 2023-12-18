@@ -13,6 +13,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
+					<Add directory="../singlyLinkedList" />
 				</Compiler>
 			</Target>
 			<Target title="Release">
@@ -22,6 +23,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
+					<Add directory="../singlyLinkedList" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -32,8 +34,10 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="LinkedListV2.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="singlyLinkedList.cpp" />
+		<Unit filename="src/LinkedListV2.cpp" />
 		<Unit filename="struct.h" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
