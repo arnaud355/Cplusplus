@@ -114,11 +114,29 @@ int main()
     linkedListv2.addElement(32);
     linkedListv2.addElement(33);
     linkedListv2.addElement(34);
+    linkedListv2.addElement(35);
 
     linkedListv2.print();
 
     Node* nodeTail = linkedListv2.getTail();
     cout << "node tail : " << nodeTail->m_data << endl;
+    cout << "taille liste : " << linkedListv2.getLength() << endl;
+
+    linkedListv2.delete_end();
+    linkedListv2.print();
+    cout << "taille liste : " << linkedListv2.getLength() << endl;
+
+    linkedListv2.delete_front();
+    linkedListv2.print();
+    cout << "taille liste : " << linkedListv2.getLength() << endl;
+
+    linkedListv2.delete_nth(3);
+    linkedListv2.print();
+    cout << "taille liste : " << linkedListv2.getLength() << endl;
+
+    linkedListv2.delete_value(32);
+    linkedListv2.print();
+    cout << "taille liste : " << linkedListv2.getLength() << endl;
 
     return 0;
 }

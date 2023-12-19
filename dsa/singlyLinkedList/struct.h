@@ -27,13 +27,20 @@ class LinkedList {
         Node* getHead() const;
         Node* getTail() const;
         int getLength() const;
-        Node* get_nth(int n);
-        Node* get_nth_back(int n);
+        Node* get_nth(int n) const;
+        Node* get_nth_back(int n) const;
         int searchItem(int value);
         int searchItemImproved(int value);
         bool isSame(const LinkedList& other);
         bool isSameAndLength(const LinkedList& other);
-        //void debugVerifyDataIntegrety();
+
+        //Prevent pass linked list without & (prevent copy and assign)
+        LinkedList(const LinkedList&) = delete;
+
+        //Prevent return linked list from function (prevent copy and assign)
+        LinkedList &operator=(const LinkedList &another) = delete;
+
+        //void debugVerifyDataIntegrity();
         //std::string debugToString();
         //void debugPrintNode(Node* node, bool isSeparate);
         //void debugPrintList(std::string msg);

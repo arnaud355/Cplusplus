@@ -11,17 +11,16 @@ LinkedList::LinkedList(): head(nullptr), tail(nullptr) {
     // Initialize variables or perform necessary setup
 }
 
-//Prevent pass linked list without &
-//LinkedList::LinkedList(const LinkedList&) = delete;
-
-//Prevent return linked list from function
-//LinkedList::LinkedList &operator=(const LinkedList &another) = delete;
-
 LinkedList::~LinkedList() {
     // Destructor implementation
     // Perform cleanup, delete allocated memory, etc
-    delete head;
-    head = nullptr;
+    while(head){
+        //Parcourir les noeuds et supprimer tete
+        // adresse suivante sera la tete, à la fin head = nullptr
+        Node* current = head->next;
+        delete head;
+        head = current;
+    }
 
     delete tail;
     tail = nullptr;
@@ -94,10 +93,12 @@ void LinkedList::delete_end(){
     while(tempNode != nullptr){
         if(tempNode->next == tail){
             tail->next = nullptr;
+            delete tail;
             tail = nullptr;
             tempNode->next = nullptr;
             tail = tempNode;
             length--;
+            break;
         }
         tempNode = tempNode->next;
     }
@@ -106,12 +107,16 @@ void LinkedList::delete_end(){
 void LinkedList::delete_front(){
     if(head != nullptr){
         if(head == tail){
+            delete head;
             head = nullptr;
+            delete tail;
             tail = nullptr;
             length--;
         }
         else{
             head->next->prev = nullptr;
+            delete head;
+            head = nullptr;
             head = head->next;
             length--;
         }
@@ -131,7 +136,7 @@ int LinkedList::getLength () const {
     return length;
 }
 
-Node* LinkedList::get_nth(int n){
+Node* LinkedList::get_nth(int n) const {
     int pos = 0;
     for(Node* cur = head; cur; cur = cur->next){
         pos++;
@@ -141,7 +146,7 @@ Node* LinkedList::get_nth(int n){
     }
     return nullptr;
 }
-Node* LinkedList::get_nth_back(int n){
+Node* LinkedList::get_nth_back(int n) const {
     int idx = length - n;
     int pos = length + 1;
 
@@ -236,6 +241,18 @@ bool LinkedList::isSame(const LinkedList& other){
 
     std::cout << "les 2 chaines ne sont pas les memes" << std::endl;
     return false;
+    /* other way
+    Node* h1 = head, *h2 = other.head;
+
+    while(h1 && h2){
+        if(h1->m_data != h2->m_data)
+            return false;
+        h1 = h1->next, h2 = h2->next;
+    }
+    //make sure both ends together
+    //h1 et h2 sont à nullptr, leurs contraire doit être vrai
+    return !h1 && !h2;
+    */
 }
 
 bool LinkedList::isSameAndLength(const LinkedList& other){
@@ -355,7 +372,7 @@ Node* printNodeFReversed(Node* tail){
 }
 
 /*
-void LinkedList::debugVerifyDataIntegrety(){
+void LinkedList::debugVerifyDataIntegrity(){
     if(length == 0){
         //avec assert si expression est fausse arret programme et message alerte
         assert(head == nullptr);
