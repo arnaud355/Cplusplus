@@ -5,6 +5,7 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <utility>
 
 LinkedList::LinkedList(): head(nullptr), tail(nullptr) {
     // Constructor implementation
@@ -467,4 +468,16 @@ void LinkedList::debug_remove_node(Node* node){
         m_debug_data.erase(it);
 }
 */
-
+Node* f(Node* cur) {
+	if (cur && cur->next) {
+		Node* rem = f(cur->next);
+		rem->next = cur;
+		cur->next = nullptr;
+	}
+	std::cout << cur->m_data << std::endl;
+	return cur;
+}
+void factorial(Node* head, Node* tail) {
+    f(head);
+	std::swap(head, tail);
+}

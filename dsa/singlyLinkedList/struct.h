@@ -65,6 +65,10 @@ void print3(Node* head);
 
 int find(Node* startNode, int value);
 
+Node* f(Node* cur);
+
+void factorial(Node* head, Node* tail);
+
 //void test1();
 
 //void debug_add_node(Node* node);

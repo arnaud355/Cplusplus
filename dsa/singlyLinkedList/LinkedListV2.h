@@ -18,11 +18,14 @@ class LinkedListV2
         void delete_nth(int index);
         void delete_value(int value);
         Node* get_nth(int n) const;
+        void delete_node_with_key(int value);
+        void swap_pairs();
 
     protected:
 
     private:
         Node* head {};
+        Node* tail {};
         int length = 0;
 };
 

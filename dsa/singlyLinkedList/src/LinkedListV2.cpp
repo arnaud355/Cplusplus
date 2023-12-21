@@ -2,7 +2,7 @@
 #include "../struct.h"
 #include <iostream>
 
-LinkedListV2::LinkedListV2(): head(nullptr)
+LinkedListV2::LinkedListV2(): head(nullptr), tail(nullptr)
 {
     //ctor
 }
@@ -17,6 +17,9 @@ LinkedListV2::~LinkedListV2()
         delete head;
         head = current;
     }
+
+    delete tail;
+    tail = nullptr;
 
     this->setLength(0);
 
@@ -159,4 +162,48 @@ Node* LinkedListV2::get_nth(int n) const {
         }
     }
     return nullptr;
+}
+//delete the first node meet with the value
+void LinkedListV2::delete_node_with_key(int value){
+    bool oneVal = false;
+    int pos = 0;
+
+    if(head != nullptr){
+        for(Node* cur = head; cur; cur = cur->next){
+                pos++;
+                if(cur->m_data == value && !oneVal){
+                    if(pos == 1){
+                        this->delete_front();
+                        oneVal = true;
+                        this->setLength(-1);
+                    }
+                    else if (pos == this->getLength()){
+                        this->delete_end();
+                        oneVal = true;
+                        this->setLength(-1);
+                    }
+                    else{
+                        this->delete_value(value);
+                        oneVal = true;
+                        this->setLength(-1);
+                    }
+                }
+        }
+    }
+}
+
+void LinkedListV2::swap_pairs(){
+    int temp = 0;
+    int index = 1;
+
+    if(this->getLength() > 1){
+        for(Node* cur = head; cur; cur = cur->next){
+            if(index % 2 != 0 && cur != nullptr && cur->next != nullptr){
+                temp = cur->m_data;
+                cur->m_data = cur->next->m_data;
+                cur->next->m_data = temp;
+            }
+            index++;
+        }
+    }
 }

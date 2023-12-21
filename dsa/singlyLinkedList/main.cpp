@@ -138,5 +138,41 @@ int main()
     linkedListv2.print();
     cout << "taille liste : " << linkedListv2.getLength() << endl;
 
+
+    //create 5 objects and set data
+    Node* node1 = new Node(1);
+    Node* node2 = new Node(2);
+    Node* node3 = new Node(3);
+    Node* node4 = new Node(4);
+    Node* node5 = new Node(5);
+
+
+    //set 4 links
+    node1->next = node2; //1-2 link
+    node2->next = node3; //2-3 link
+    node3->next = node4; //3-4 link
+    node4->next = node5; //4-E link
+    node5->next = nullptr;
+
+    factorial(node1,node5);
+
+
+    LinkedListV2 linkedList3;
+    linkedList3.addElement(1);
+    linkedList3.addElement(2);
+    linkedList3.addElement(3);
+    linkedList3.addElement(4);
+    linkedList3.addElement(2);
+    linkedList3.addElement(6);
+
+    linkedList3.print();
+    cout << "taille liste : " << linkedList3.getLength() << endl;
+
+    linkedList3.delete_node_with_key(2);
+    linkedList3.print();
+    cout << "taille liste : " << linkedList3.getLength() << endl;
+    linkedList3.swap_pairs();
+    linkedList3.print();
+
     return 0;
 }
