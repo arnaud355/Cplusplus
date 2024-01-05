@@ -164,15 +164,37 @@ int main()
     linkedList3.addElement(4);
     linkedList3.addElement(2);
     linkedList3.addElement(6);
-
+    cout << "*****************************" << endl;
     linkedList3.print();
-    cout << "taille liste : " << linkedList3.getLength() << endl;
+    cout << "taille liste" << linkedList3.getLength() << endl;
 
     linkedList3.delete_node_with_key(2);
     linkedList3.print();
     cout << "taille liste : " << linkedList3.getLength() << endl;
+    cout << "*****************************" << endl;
     linkedList3.swap_pairs();
     linkedList3.print();
+    cout << "taille liste : " << linkedList3.getLength() << endl;
+    cout << "*****************************" << endl;
+    linkedList3.print();
+    cout << "************Inversed addresses*****************" << endl;
+    linkedList3.reverseListNodes();
+    linkedList3.print();
+    // 31246  -> 64213
+    cout << "*****************************" << endl;
+    LinkedListV2 linkedList4;
+    linkedList4.addElement(1);
+    linkedList4.addElement(2);
+    linkedList4.addElement(3);
+    linkedList4.addElement(4);
+    linkedList4.addElement(5);
+    linkedList4.addElement(6);
+    linkedList4.print();
+    cout << "taille liste " << linkedList4.getLength() << endl;
+    cout << "*****************************" << endl;
+    linkedList4.deleteEvenPos();
+    linkedList4.print();
+    cout << "taille liste " << linkedList4.getLength() << endl;
 
     return 0;
 }

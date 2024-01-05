@@ -20,6 +20,10 @@ class LinkedListV2
         Node* get_nth(int n) const;
         void delete_node_with_key(int value);
         void swap_pairs();
+        void printNodesAddresses();
+        void reverseListNodes();
+        void deleteEvenPos();
+        void insertSorted(int value);
 
     protected:
 

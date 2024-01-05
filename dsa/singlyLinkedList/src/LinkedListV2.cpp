@@ -30,7 +30,6 @@ void LinkedListV2::addElement(int value){
     Node* newNode = new Node(value);
     if(head == nullptr){
         head = newNode;
-        head->next = nullptr;
         this->setLength(1);
     }
     else{
@@ -62,6 +61,8 @@ Node* LinkedListV2::getTail() const {
                 return cur;
             }
     }
+
+    return nullptr;
 }
 
 int LinkedListV2::getLength() const {
@@ -175,17 +176,14 @@ void LinkedListV2::delete_node_with_key(int value){
                     if(pos == 1){
                         this->delete_front();
                         oneVal = true;
-                        this->setLength(-1);
                     }
                     else if (pos == this->getLength()){
                         this->delete_end();
                         oneVal = true;
-                        this->setLength(-1);
                     }
                     else{
                         this->delete_value(value);
                         oneVal = true;
-                        this->setLength(-1);
                     }
                 }
         }
@@ -205,5 +203,89 @@ void LinkedListV2::swap_pairs(){
             }
             index++;
         }
+    }
+}
+
+void LinkedListV2::printNodesAddresses(){
+    if(head == nullptr){
+        std::cout << "Pas d elements" << std::endl;
+    }
+    else{
+        for(Node* cur = head; cur; cur = cur->next){
+            std::cout << "addresse du noeud :" << cur << std::endl;
+        }
+    }
+}
+
+void LinkedListV2::reverseListNodes(){
+    //int i = 1;
+    int j = this->getLength();
+    Node* previous = nullptr;
+    Node* cur = nullptr;
+
+    Node* lastNode = this->getTail();
+    //Attention de ne pas appeler de maniere circulaire les noeuds
+    while(j >= 2){
+        cur = this->get_nth(j);
+
+        previous = this->get_nth(j - 1);
+        cur->next = previous;
+        previous->next = nullptr;
+        j--;
+    }
+
+    head = lastNode;
+     /*if(this->getLength() > 1){
+            while(i < j){
+
+                curLast = this->get_nth(j);
+
+                tempNode = curFirst;
+                curFirst = curLast;
+                curLast = tempNode;
+
+                curFirst =  curFirst->next;
+
+                i++;
+                j--;
+            }
+    }*/
+}
+//delete valeur aux positions paires (pas les valeurs)
+void LinkedListV2::deleteEvenPos(){
+    int i = 1;
+
+    for(Node* cur = head; cur; cur = cur->next){
+            std::cout << "index outside : " << i << std::endl;
+        if(i % 2 == 0){
+            if(cur->next != nullptr){
+                std::cout << "index : " << i << std::endl;
+                this->delete_nth(i);
+            }
+            else{
+                std::cout << "index end: " << i << std::endl;
+                this->delete_end();
+            }
+        }
+        i++;
+    }
+}
+//liste déjà triée
+void LinkedListV2::insertSorted(int value){
+
+    Node* newNode = new Node(value);
+
+    for(Node* cur = head; cur; cur = cur->next){
+            if(cur->m_data < newNode->m_data && cur == head){
+                cur->next = head;
+                head = cur;
+            }
+            else if(cur->m_data < newNode->m_data && newNode->m_data < cur->next->m_data){
+                newNode->next = cur->next;
+                cur->next = newNode;
+            }
+            else{
+                cur->next = newNode;
+            }
     }
 }
