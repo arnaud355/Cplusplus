@@ -196,5 +196,49 @@ int main()
     linkedList4.print();
     cout << "taille liste " << linkedList4.getLength() << endl;
 
+    cout << "*****************************" << endl;
+    LinkedListV2 linkedList5;
+
+    linkedList5.insertSorted(10);
+    linkedList5.insertSorted(2);
+    linkedList5.insertSorted(4);
+    //linkedList5.print();
+    //linkedList5.insertSorted(3);
+    //linkedList5.insertSorted(1);
+
+    cout << "*****************************" << endl;
+    linkedList5.print();
+
+    cout << "*****************************" << endl;
+    LinkedListV2 linkedList6;
+    linkedList6.addElement(6);
+    linkedList6.addElement(10);
+    linkedList6.addElement(8);
+    linkedList6.addElement(15);
+    linkedList6.print();
+    linkedList6.swapHeadAndTail();
+    cout << "*****************************" << endl;
+    linkedList6.print();
+    cout << "*****************************" << endl;
+    linkedList6.leftRotate(2);
+    linkedList6.print();
+
+    cout << "*****************************" << endl;
+    LinkedListV2 linkedList7;
+    linkedList7.addElement(1);
+    linkedList7.addElement(2);
+    linkedList7.addElement(1);
+    linkedList7.addElement(5);
+    linkedList7.addElement(3);
+    linkedList7.addElement(2);
+    linkedList7.addElement(4);
+    linkedList7.addElement(3);
+    linkedList7.addElement(5);
+    linkedList7.addElement(2);
+    linkedList7.print();
+    cout << "***********Remove duplicates******************" << endl;
+    linkedList7.removeDuplicates();
+    linkedList7.print();
+
     return 0;
 }

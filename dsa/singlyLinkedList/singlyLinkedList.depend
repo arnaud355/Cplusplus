@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1704479970 source:c:\users\arnau\documents\cpp\dsa\singlylinkedlist\main.cpp
+1704724134 source:c:\users\arnau\documents\cpp\dsa\singlylinkedlist\main.cpp
 	<iostream>
 	"struct.h"
 	"LinkedListV2.h"
@@ -19,11 +19,12 @@
 	<algorithm>
 	<utility>
 
-1704310620 c:\users\arnau\documents\cpp\dsa\singlylinkedlist\linkedlistv2.h
+1704722651 c:\users\arnau\documents\cpp\dsa\singlylinkedlist\linkedlistv2.h
 	"struct.h"
 
-1704477950 source:c:\users\arnau\documents\cpp\dsa\singlylinkedlist\src\linkedlistv2.cpp
+1704737688 source:c:\users\arnau\documents\cpp\dsa\singlylinkedlist\src\linkedlistv2.cpp
 	"../LinkedListV2.h"
 	"../struct.h"
 	<iostream>
+	<list>
 

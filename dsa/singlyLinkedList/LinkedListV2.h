@@ -24,7 +24,9 @@ class LinkedListV2
         void reverseListNodes();
         void deleteEvenPos();
         void insertSorted(int value);
-
+        void swapHeadAndTail();
+        void leftRotate(int k);
+        void removeDuplicates();
     protected:
 
     private:

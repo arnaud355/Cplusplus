@@ -1,6 +1,7 @@
 #include "../LinkedListV2.h"
 #include "../struct.h"
 #include <iostream>
+#include <list>
 
 LinkedListV2::LinkedListV2(): head(nullptr), tail(nullptr)
 {
@@ -30,12 +31,14 @@ void LinkedListV2::addElement(int value){
     Node* newNode = new Node(value);
     if(head == nullptr){
         head = newNode;
+        head->next = nullptr;
         this->setLength(1);
     }
     else{
         for(Node* cur = head; cur; cur = cur->next){
             if(cur->next == nullptr){
                 cur->next = newNode;
+                newNode->next = nullptr;
                 this->setLength(1);
                 break;
             }
@@ -275,17 +278,127 @@ void LinkedListV2::insertSorted(int value){
 
     Node* newNode = new Node(value);
 
-    for(Node* cur = head; cur; cur = cur->next){
-            if(cur->m_data < newNode->m_data && cur == head){
-                cur->next = head;
-                head = cur;
+    Node* previousNode = nullptr;
+    int i = 1;
+
+    if(head == nullptr){
+        head = newNode;
+        head->next = nullptr;
+        this->setLength(1);
+    }
+    else{
+        for(Node* cur = head; cur; cur = cur->next){
+            if(newNode->m_data <= cur->m_data && cur == head){
+                newNode->next = head;
+                head = newNode;
+                this->setLength(1);
             }
-            else if(cur->m_data < newNode->m_data && newNode->m_data < cur->next->m_data){
+            else if(newNode->m_data >= cur->m_data && cur->next == nullptr){
+                cur->next = newNode;
+                newNode->next = nullptr;
+                this->setLength(1);
+            }
+            else if(newNode->m_data < cur->m_data && cur->next == nullptr){
+                newNode->next = cur;
+                previousNode = this->get_nth(i - 1);
+                previousNode->next = newNode;
+                cur->next = nullptr;
+                this->setLength(1);
+            }//au dessus bon
+            /*
+            else if(newNode->m_data > cur->m_data && newNode->m_data < cur->next->m_data && cur->next != nullptr){
                 newNode->next = cur->next;
                 cur->next = newNode;
-            }
-            else{
-                cur->next = newNode;
-            }
+                this->setLength(1);
+            }*/
+            i++;
+        }
     }
+
+}
+
+void LinkedListV2::swapHeadAndTail(){
+    Node* lastNode = this->getTail();
+    Node* beforeLastNode = this->get_nth(this->getLength() - 1);
+    Node* secondNode = this->get_nth(2);
+
+    beforeLastNode->next = head;
+
+    lastNode->next = secondNode;
+
+    head->next = nullptr;
+    head = lastNode;
+
+}
+
+void LinkedListV2::leftRotate(int k = 1){
+    Node* lastNode = this->getTail();
+    Node* secondNode = this->get_nth(2);
+
+    while(k > 0){
+        lastNode = this->getTail();
+        secondNode = this->get_nth(2);
+        lastNode->next = head;
+        head->next = nullptr;
+        head = secondNode;
+        k--;
+    }
+}
+
+//remove duplicate and keep the first met
+void LinkedListV2::removeDuplicates(){
+    int num = 0;
+    int counter = 0;
+    int i = 1;
+    std::list<int> listIdx{};
+
+    for(Node* cur = head; cur; cur = cur->next){
+        num = cur->m_data;
+        for(Node* cur2 = head; cur2; cur2 = cur2->next){
+            if(num == cur2->m_data){
+                counter++;
+                listIdx.push_back(i);
+            }
+            i++;
+        }
+
+        if(counter > 1){
+            auto it = listIdx.begin();
+            ++it; // Move the iterator to the second element
+            while (it != listIdx.end()) {
+                if(*it == this->getLength()){
+                    this->delete_end();
+                }
+                else {
+                    this->delete_nth(*it);
+                }
+
+                ++it; // Move to the next element
+            }
+        }
+        listIdx.clear();
+        counter = 0;
+        i = 1;
+    }
+
+    /*for(Node* cur = head; cur; cur = cur->next){
+        num = cur->m_data;
+        idxToLock = i;
+        std::cout << "idx : " << idxToLock << std::endl;
+        for(Node* cur2 = head; cur2; cur2 = cur2->next){
+            if(cur2->m_data == num && j != idxToLock){
+                if(cur2->next == nullptr){
+                    this->delete_end();
+                }
+                else{
+                    std::cout << "data : " << cur2->m_data << std::endl;
+                    std::cout << "j : " << j << std::endl;
+                    this->delete_value(cur2->m_data);
+                }
+            }
+            j++;
+        }
+        j = 1;
+        i++;
+    }*/
 }
