@@ -11,6 +11,7 @@ class LinkedListV2
         void print();
         void addElement(int value);
         Node* getTail() const;
+        Node* getHead() const;
         int getLength() const;
         void setLength(int value);
         void delete_end();
@@ -27,6 +28,11 @@ class LinkedListV2
         void swapHeadAndTail();
         void leftRotate(int k);
         void removeDuplicates();
+        void removeLastOccurence(int key);
+        void moveBack(int key);
+        //int maxValue();
+        int maxValue(Node* head, bool firstCall);
+        void arrangeOddAndEven();
     protected:
 
     private:

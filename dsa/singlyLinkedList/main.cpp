@@ -240,5 +240,51 @@ int main()
     linkedList7.removeDuplicates();
     linkedList7.print();
 
+    cout << "*****************************" << endl;
+    LinkedListV2 linkedList8;
+    linkedList8.addElement(1);
+    linkedList8.addElement(2);
+    linkedList8.addElement(3);
+    linkedList8.addElement(4);
+    linkedList8.addElement(1);
+    linkedList8.print();
+    cout << "*****************************" << endl;
+    linkedList8.removeLastOccurence(1);
+    linkedList8.print();
+
+    cout << "*****************************" << endl;
+    LinkedListV2 linkedList9;
+    linkedList9.addElement(5);
+    linkedList9.addElement(1);
+    linkedList9.addElement(2);
+    linkedList9.addElement(5);
+    linkedList9.addElement(3);
+    linkedList9.print();
+    cout << "*****************************" << endl;
+    linkedList9.moveBack(5);
+    linkedList9.print();
+    cout << "*************list10****************" << endl;
+    LinkedListV2 linkedList10;
+    linkedList10.addElement(2);
+    linkedList10.addElement(7);
+    linkedList10.addElement(5);
+    linkedList10.addElement(9);
+    linkedList10.addElement(2);
+    linkedList10.moveBack(2);
+    linkedList10.print();
+    cout << "max value : " << linkedList10.maxValue(linkedList10.getHead(), true) << endl;
+
+    cout << "*************list11****************" << endl;
+    LinkedListV2 linkedList11;
+    linkedList11.addElement(10);
+    linkedList11.addElement(20);
+    linkedList11.addElement(3);
+    linkedList11.addElement(7);
+    linkedList11.addElement(15);
+    linkedList11.print();
+
+    linkedList11.arrangeOddAndEven();
+    linkedList11.print();
+
     return 0;
 }

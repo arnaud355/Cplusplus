@@ -2,6 +2,7 @@
 #include "../struct.h"
 #include <iostream>
 #include <list>
+#include <limits.h>
 
 LinkedListV2::LinkedListV2(): head(nullptr), tail(nullptr)
 {
@@ -56,6 +57,10 @@ void LinkedListV2::print(){
             std::cout << cur->m_data << std::endl;
         }
     }
+}
+
+Node* LinkedListV2::getHead() const {
+    return head;
 }
 
 Node* LinkedListV2::getTail() const {
@@ -401,4 +406,189 @@ void LinkedListV2::removeDuplicates(){
         j = 1;
         i++;
     }*/
+}
+//remove the values accordingly with the key, except one value
+void LinkedListV2::removeLastOccurence(int key = 1){
+
+    int counter = 0;
+    int i = 1;
+    std::list<int> listIdx{};
+
+    for(Node* cur = head; cur; cur = cur->next){
+        if(key == cur->m_data){
+            counter++;
+            listIdx.push_back(i);
+        }
+        i++;
+    }
+
+    if(counter > 1){
+        auto it = listIdx.begin();
+        ++it; // Move the iterator to the second element
+        while (it != listIdx.end()) {
+            if(*it == this->getLength()){
+                this->delete_end();
+            }
+            else {
+                this->delete_nth(*it);
+            }
+
+            ++it; // Move to the next element
+        }
+    }
+    listIdx.clear();
+}
+//move all the values of the key at the end
+void LinkedListV2::moveBack(int key = 1){
+    int counter = 0;
+    int i = 1;
+    std::list<int> listIdx{};
+    Node* previousNode = nullptr;
+    Node* curNode = nullptr;
+    Node* lastNode = nullptr;
+    Node* secondNode = nullptr;
+    bool firstPassage = true;
+
+    for(Node* cur = head; cur; cur = cur->next){
+        if(key == cur->m_data){
+            counter++;
+            listIdx.push_back(i);
+        }
+        i++;
+    }
+
+    if(counter > 1){
+        auto it = listIdx.begin();
+
+        while (it != listIdx.end()) {
+
+            if(*it == 1){
+                lastNode = this->getTail();
+                secondNode = this->get_nth(2);
+
+                lastNode->next = head;
+                head->next = nullptr;
+                head = secondNode;
+                firstPassage = false;
+            }
+            else{
+                if(*it != this->getLength() && firstPassage){
+                    curNode = this->get_nth(*it);
+                    previousNode = this->get_nth(*it - 1);
+                    lastNode = this->getTail();
+
+                    previousNode->next = previousNode->next->next;
+                    lastNode->next = curNode;
+                    curNode->next = nullptr;
+                    firstPassage = false;
+                }
+                else{
+                    curNode = this->get_nth(*it - 1);
+
+                    if(curNode == head){
+                        lastNode = this->getTail();
+                        secondNode = this->get_nth(2);
+
+                        lastNode->next = head;
+                        head->next = nullptr;
+                        head = secondNode;
+                    }
+                    else{
+                        previousNode = this->get_nth(*it - 1);
+
+                        if(previousNode == head){
+                            lastNode = this->getTail();
+
+                            previousNode->next = previousNode->next->next;
+                            lastNode->next = curNode;
+                            curNode->next = nullptr;
+                        }
+                        else{
+                            previousNode = this->get_nth(*it - 2);
+                            lastNode = this->getTail();
+
+                            previousNode->next = previousNode->next->next;
+                            lastNode->next = curNode;
+                            curNode->next = nullptr;
+                        }
+                    }
+                }
+            }
+
+            ++it; // Move to the next element
+        }
+    }
+    listIdx.clear();
+}
+//recursive function
+int LinkedListV2::maxValue(Node* head = nullptr, bool firstCall = true){
+    if(firstCall){
+        return maxValue(head, false);
+    }
+
+    if(head == nullptr){
+        //INT_MIN le minimun que stocke un int : –2147483648   (for 32-bit Integers)
+        return INT_MIN;
+    }
+
+    return std::max(head->m_data, maxValue(head->next, false));
+}
+/*
+int LinkedListV2::maxValue(){
+    int maxVal = 0;
+
+    if(head == nullptr)
+        return -1;
+
+    Node* cur = head;
+    maxVal = cur->m_data;
+
+    if(maxVal < cur->next->m_data){
+        maxVal = maxValue();
+    }
+
+    return maxVal;
+
+}*/
+/*
+int LinkedListV2::maxValue(Node* head = nullptr, bool firstCall = true) {
+    if (firstCall) {
+        if (head == nullptr) {
+            // Handle empty list scenario
+            return INT_MIN;
+        }
+        // Initial call to the function without firstCall flag
+        return maxValue(head, false);
+    }
+
+    if (head == nullptr) {
+        // Reached the end of the list
+        return INT_MIN;
+    }
+
+    // Recursively get the maximum value from the rest of the list
+    int maxRest = maxValue(head->next, false);
+
+    // Compare current node value with the maximum of the rest of the list
+    return std::max(head->m_data, maxRest);
+}
+*/
+void LinkedListV2::arrangeOddAndEven(){
+    int i = 1;
+    int j = 1;
+    Node* previousNode = nullptr;
+    Node* behindNode = nullptr;
+
+    for(Node* cur = head; cur; cur = cur->next){
+        if(i % 2 != 0 && i > 1){
+            previousNode = this->get_nth(i - j);
+            behindNode = this->get_nth(i - j - 1);
+
+            cur->next = previousNode;
+            behindNode->next = cur;
+
+            j++;
+        }
+        i++;
+    }
 }
