@@ -2,6 +2,7 @@
 #define LINKEDLISTV2_H
 #include "struct.h"
 
+//Single LinkedList, without prev in insert functions
 //LinkedList without head
 class LinkedListV2
 {
@@ -10,6 +11,8 @@ class LinkedListV2
         ~LinkedListV2();
         void print();
         void addElement(int value);
+        //insertElement manage also insertion for the first and last node
+        void insertElement(int value, int pos);
         Node* getTail() const;
         Node* getHead() const;
         int getLength() const;
@@ -31,8 +34,12 @@ class LinkedListV2
         void removeLastOccurence(int key);
         void moveBack(int key);
         //int maxValue();
-        int maxValue(Node* head, bool firstCall);
+        //int maxValue(Node* head, bool firstCall);
+        int maxValue(Node* head);
         void arrangeOddAndEven();
+        void insertAlternate(const LinkedListV2& other);
+        void addNumber(const LinkedListV2& other);
+
     protected:
 
     private:

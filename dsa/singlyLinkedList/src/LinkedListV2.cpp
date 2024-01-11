@@ -47,6 +47,58 @@ void LinkedListV2::addElement(int value){
     }
 }
 
+void LinkedListV2::insertElement(int value, int pos){
+
+    Node* newNode = new Node(value);
+    int sizeList = this->getLength();
+
+    if(head == nullptr){
+        head = newNode;
+        head->next = nullptr;
+        this->setLength(1);
+    }
+    else {
+
+        if(pos <= 0 || pos > sizeList + 1){
+            std::cout << "impossible to insert element" << std::endl;
+        }
+        else {
+                Node* lastNode = nullptr;
+                Node* previousNode = nullptr;
+                Node* nextNode = nullptr;
+
+                if(pos == 1){
+                    newNode->next = head;
+                    head = newNode;
+                    this->setLength(1);
+                }
+                else if(pos == sizeList){
+                    lastNode = this->getTail();
+                    previousNode = this->get_nth(pos - 1);
+
+                    newNode->next =lastNode;
+                    previousNode->next = newNode;
+                    this->setLength(1);
+                }
+                else if(pos == sizeList + 1){
+                    lastNode = this->getTail();
+                    lastNode->next = newNode;
+                    newNode->next = nullptr;
+                    this->setLength(1);
+                }
+                else{
+                    previousNode = this->get_nth(pos - 1);
+                    nextNode = this->get_nth(pos);
+
+                    newNode->next = nextNode;
+                    previousNode->next = newNode;
+                    this->setLength(1);
+                }
+
+            }
+    }
+}
+
 void LinkedListV2::print(){
 
     if(head == nullptr){
@@ -520,6 +572,18 @@ void LinkedListV2::moveBack(int key = 1){
     }
     listIdx.clear();
 }
+
+//recursive function
+int LinkedListV2::maxValue(Node* head = nullptr){
+
+    if(head == nullptr){
+        //INT_MIN le minimun que stocke un int : –2147483648   (for 32-bit Integers)
+        return INT_MIN;
+    }
+
+    return std::max(head->m_data, maxValue(head->next));
+}
+/*
 //recursive function
 int LinkedListV2::maxValue(Node* head = nullptr, bool firstCall = true){
     if(firstCall){
@@ -532,7 +596,7 @@ int LinkedListV2::maxValue(Node* head = nullptr, bool firstCall = true){
     }
 
     return std::max(head->m_data, maxValue(head->next, false));
-}
+}*/
 /*
 int LinkedListV2::maxValue(){
     int maxVal = 0;
@@ -573,22 +637,106 @@ int LinkedListV2::maxValue(Node* head = nullptr, bool firstCall = true) {
     return std::max(head->m_data, maxRest);
 }
 */
+//valeurs index impaires rangées en premier
 void LinkedListV2::arrangeOddAndEven(){
+
     int i = 1;
-    int j = 1;
-    Node* previousNode = nullptr;
-    Node* behindNode = nullptr;
+    int j = 0;
+    int v = 1;
+    Node* betweenNodeMax = nullptr;
+    Node* betweenNodeMin = nullptr;
+    Node* beforeLastNode = nullptr;
 
     for(Node* cur = head; cur; cur = cur->next){
         if(i % 2 != 0 && i > 1){
-            previousNode = this->get_nth(i - j);
-            behindNode = this->get_nth(i - j - 1);
-
-            cur->next = previousNode;
-            behindNode->next = cur;
-
             j++;
+            v++;
+            betweenNodeMax = this->get_nth(i - j);
+            betweenNodeMin = this->get_nth(i - v);
+            std::cout << "i : " << i << "j : " << j << "v : " << v << std::endl;
+            std::cout << "cur data : " << cur->m_data << std::endl;
+            if(cur->next == nullptr){
+                beforeLastNode = this->get_nth(i - 1);
+
+                cur->next = betweenNodeMax;
+                beforeLastNode->next = nullptr;
+                betweenNodeMin->next = cur;
+            }
+            else{
+                betweenNodeMax->next = betweenNodeMax->next->next;
+                cur->next = betweenNodeMax;
+                betweenNodeMin->next = cur;
+            }
         }
         i++;
+    }
+}
+
+void LinkedListV2::insertAlternate(const LinkedListV2& other){
+    if (this->getHead() == nullptr) {
+        std::cout << "No values in the list object" << std::endl;
+    }
+    else if(other.getHead() == nullptr){
+        std::cout << "No values in the list pass in reference" << std::endl;
+    }
+    else {
+        Node* otherNode = nullptr;
+        int i = 1;
+        int j = 2;
+        int v = 0;
+
+        if(this->getLength() > other.getLength()){
+
+            while(i <= other.getLength()){
+                otherNode = other.get_nth(i);
+                this->insertElement(otherNode->m_data, j);
+                j = j + 2;
+                i++;
+            }
+        }
+        else if(this->getLength() < other.getLength())
+        {
+            otherNode = other.get_nth(i);
+
+            while(otherNode != nullptr){
+
+                if(j <= this->getLength()){
+                    this->insertElement(otherNode->m_data, j);
+                }
+                else {
+                    this->insertElement(otherNode->m_data, v);
+                    v++;
+                }
+                j = j + 2;
+                i++;
+                v = this->getLength() + 1;
+                otherNode = other.get_nth(i);
+            }
+        }
+        else {
+            for(Node* cur = head; cur; cur = cur->next){
+                otherNode = other.get_nth(i);
+
+                if(otherNode != nullptr){
+                     this->insertElement(otherNode->m_data, j);
+                }
+                i++;
+                j = j + 2;
+            }
+        }
+    }
+
+}
+//addition of inversion list : 123 represent 321, 453 represent 354, = 675 (576)
+void LinkedListV2::addNumber(const LinkedListV2& other){
+
+    for(Node* cur = head; cur; cur = cur->next){
+            otherNode = other.get_nth(i);
+
+            if(otherNode != nullptr){
+                 this->insertElement(otherNode->m_data, j);
+            }
+            i++;
+            j = j + 2;
     }
 }

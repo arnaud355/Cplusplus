@@ -267,12 +267,13 @@ int main()
     LinkedListV2 linkedList10;
     linkedList10.addElement(2);
     linkedList10.addElement(7);
-    linkedList10.addElement(5);
-    linkedList10.addElement(9);
+    linkedList10.addElement(15);
+    linkedList10.addElement(1);
     linkedList10.addElement(2);
     linkedList10.moveBack(2);
     linkedList10.print();
-    cout << "max value : " << linkedList10.maxValue(linkedList10.getHead(), true) << endl;
+    //cout << "max value : " << linkedList10.maxValue(linkedList10.getHead(), true) << endl;
+    cout << "max value : " << linkedList10.maxValue(linkedList10.getHead()) << endl;
 
     cout << "*************list11****************" << endl;
     LinkedListV2 linkedList11;
@@ -283,8 +284,41 @@ int main()
     linkedList11.addElement(15);
     linkedList11.print();
 
-    linkedList11.arrangeOddAndEven();
+    //linkedList11.arrangeOddAndEven();
+    //10,3,15,20,7
     linkedList11.print();
+    cout << "*************list12 and list13****************" << endl;
+    LinkedListV2 linkedList12;
+    LinkedListV2 linkedList13;
+
+    linkedList12.addElement(1);
+    linkedList12.addElement(3);
+    //linkedList12.addElement(5);
+    //linkedList12.addElement(7);
+
+    linkedList13.addElement(2);
+    linkedList13.addElement(4);
+    linkedList13.addElement(6);
+    linkedList13.addElement(8);
+
+    linkedList12.print();
+    cout << "*****************************" << endl;
+    linkedList12.insertAlternate(linkedList13);
+    linkedList12.print();
+
+    cout << "*****************************" << endl;
+    LinkedListV2 linkedList14;
+    LinkedListV2 linkedList15;
+
+    linkedList14.addElement(1);
+    linkedList14.addElement(2);
+    linkedList14.addElement(3);
+
+    linkedList15.addElement(4);
+    linkedList15.addElement(5);
+    linkedList15.addElement(3);
+
+    linkedList14.addNumber(linkedList15);
 
     return 0;
 }
