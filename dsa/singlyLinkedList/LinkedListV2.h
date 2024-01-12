@@ -39,6 +39,12 @@ class LinkedListV2
         void arrangeOddAndEven();
         void insertAlternate(const LinkedListV2& other);
         void addNumber(const LinkedListV2& other);
+        void changeValueOfNode(int value, int idx);
+        void removeAllRepeated();
+        int getValueFromNode(int value);
+        void replaceValueOfNode(int value, int idx);
+        int getData(int idx) const;
+        void purgeListNodeFromTo(int idxStart, int idxEnd);
 
     protected:
 

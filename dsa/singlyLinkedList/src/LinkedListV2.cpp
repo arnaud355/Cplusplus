@@ -646,30 +646,37 @@ void LinkedListV2::arrangeOddAndEven(){
     Node* betweenNodeMax = nullptr;
     Node* betweenNodeMin = nullptr;
     Node* beforeLastNode = nullptr;
+    Node* cur = head;
+    if(cur != nullptr){
+            while(i <= this->getLength()){
 
-    for(Node* cur = head; cur; cur = cur->next){
-        if(i % 2 != 0 && i > 1){
-            j++;
-            v++;
-            betweenNodeMax = this->get_nth(i - j);
-            betweenNodeMin = this->get_nth(i - v);
-            std::cout << "i : " << i << "j : " << j << "v : " << v << std::endl;
-            std::cout << "cur data : " << cur->m_data << std::endl;
-            if(cur->next == nullptr){
-                beforeLastNode = this->get_nth(i - 1);
+                if(i % 2 != 0 && i > 1){
 
-                cur->next = betweenNodeMax;
-                beforeLastNode->next = nullptr;
-                betweenNodeMin->next = cur;
+                    j++;
+                    v++;
+                    cur = this->get_nth(i);
+                    betweenNodeMax = this->get_nth(i - j);
+                    betweenNodeMin = this->get_nth(i - v);
+                    std::cout << "i : " << i << "j : " << j << "v : " << v << std::endl;
+                    std::cout << "cur data : " << cur->m_data << std::endl;
+                    if(cur->next == nullptr){
+                        beforeLastNode = this->get_nth(i - 1);
+
+                        cur->next = betweenNodeMax;
+                        beforeLastNode->next = nullptr;
+                        betweenNodeMin->next = cur;
+                    }
+                    else{
+                        betweenNodeMax->next = betweenNodeMax->next->next;
+                        cur->next = betweenNodeMax;
+                        betweenNodeMin->next = cur;
+                    }
+                }
+                i++;
             }
-            else{
-                betweenNodeMax->next = betweenNodeMax->next->next;
-                cur->next = betweenNodeMax;
-                betweenNodeMin->next = cur;
-            }
-        }
-        i++;
+
     }
+
 }
 
 void LinkedListV2::insertAlternate(const LinkedListV2& other){
@@ -727,16 +734,183 @@ void LinkedListV2::insertAlternate(const LinkedListV2& other){
     }
 
 }
-//addition of inversion list : 123 represent 321, 453 represent 354, = 675 (576)
+//addition of inversion list : 123 represent 321, 453 represent 354, = 675 (576 in the list)
 void LinkedListV2::addNumber(const LinkedListV2& other){
 
-    for(Node* cur = head; cur; cur = cur->next){
+    if (this->getHead() == nullptr) {
+        std::cout << "No values in the list object" << std::endl;
+    }
+    else if(other.getHead() == nullptr){
+        std::cout << "No values in the list pass in reference" << std::endl;
+    }
+
+    int i, v = 0;
+    Node* otherNode = nullptr;
+
+    if(this->getLength() > other.getLength()){
+        i = other.getLength();
+        v = this->getLength();
+
+        while(i >= 1){
+            otherNode = other.get_nth(i);
+            this->changeValueOfNode(otherNode->m_data, v);
+            v--;
+            i--;
+        }
+    }
+    else if(this->getLength() < other.getLength()){
+        i = other.getLength();
+        v = this->getLength();
+
+        while(i >= 1){
             otherNode = other.get_nth(i);
 
-            if(otherNode != nullptr){
-                 this->insertElement(otherNode->m_data, j);
+            if(v >= 1){
+                this->changeValueOfNode(otherNode->m_data, v);
             }
-            i++;
-            j = j + 2;
+            else{
+                this->insertElement(otherNode->m_data, 1);
+            }
+            v--;
+            i--;
+        }
+    }
+    else{
+        i = other.getLength();
+
+        while(i >= 1){
+            otherNode = other.get_nth(i);
+            this->changeValueOfNode(otherNode->m_data, i);
+            i--;
+        }
+    }
+}
+//addition value to current node value
+void LinkedListV2::changeValueOfNode(int value, int idx){
+    int i = 1;
+
+    for(Node* cur = head; cur; cur = cur->next){
+        if(i == idx){
+            cur->m_data = cur->m_data + value;
+        }
+        i++;
+    }
+}
+//replace current node value with a new value
+void LinkedListV2::replaceValueOfNode(int value, int idx){
+    int i = 1;
+
+    for(Node* cur = head; cur; cur = cur->next){
+        if(i == idx){
+            cur->m_data = value;
+        }
+        i++;
+    }
+}
+
+int LinkedListV2::getData(int idx) const {
+    int i = 1;
+
+    for(Node* cur = head; cur; cur = cur->next){
+        if(i == idx){
+            return cur->m_data;
+        }
+        i++;
+    }
+}
+//keep nodes never repeated : 1,1,2,3,5,2 => 3,5
+void LinkedListV2::removeAllRepeated(){
+    int i = 1;
+    int val = 0;
+    int counter = 0;
+    std::list<int> listIdx{};
+    LinkedListV2 linkedListExistingValues;
+
+    for(Node* cur = head; cur; cur = cur->next){
+        val = cur->m_data;
+
+        for(Node* cur2 = head; cur2; cur2 = cur2->next){
+            if(cur2->m_data == val){
+                counter++;
+            }
+        }
+
+        if(counter == 1){
+            linkedListExistingValues.addElement(val);
+        }
+        counter = 0;
+    }
+
+    while(i <= linkedListExistingValues.getLength()){
+        this->replaceValueOfNode(linkedListExistingValues.getData(i), i);
+        i++;
+    }
+
+    this->purgeListNodeFromTo(linkedListExistingValues.getLength() + 1, this->getLength());
+
+    //std::cout << "++++++++++++++++++++++++++++++" << std::endl;
+    //linkedListExistingValues.print();
+    //std::cout << "++++++++++++++++++++++++++++++" << std::endl;
+}
+
+int LinkedListV2::getValueFromNode(int value){
+
+    if(head == nullptr)
+        return INT_MIN;
+
+    for(Node* cur = head; cur; cur = cur->next){
+        if(cur->m_data == value){
+            return cur->m_data;
+        }
+    }
+
+    return INT_MAX;
+}
+
+void LinkedListV2::purgeListNodeFromTo(int idxStart, int idxEnd){
+
+    Node* previousNode = nullptr;
+    Node* currentNode = nullptr;
+    Node* nextNode = nullptr;
+
+    if(head != nullptr){
+        if(idxEnd > idxStart){
+             while(idxStart != idxEnd){
+                if(idxStart == 1){
+                    nextNode = this->get_nth(2);
+                    currentNode = this->getHead();
+                    head = nextNode;
+
+                    delete currentNode;
+                    currentNode = nullptr;
+                }
+                else if(idxStart == this->getLength()){
+                    previousNode = this->get_nth(this->getLength() - 1);
+                    currentNode = this->getTail();
+                    previousNode->next = nullptr;
+
+                    delete currentNode;
+                    currentNode = nullptr;
+                }
+                else{
+                    previousNode = this->get_nth(idxStart - 1);
+                    currentNode = this->get_nth(idxStart);
+                    nextNode = this->get_nth(idxStart + 1);
+
+                    previousNode->next = nextNode;
+
+                    delete currentNode;
+                    currentNode = nullptr;
+                }
+
+                idxStart++;
+            }
+        }
+        else if(idxEnd == idxStart){
+            std::cout << "Please, use delete function for delete one node" << std::endl;
+        }
+        else{
+            std::cout << "invalid" << std::endl;
+        }
     }
 }

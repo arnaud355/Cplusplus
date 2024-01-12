@@ -284,7 +284,7 @@ int main()
     linkedList11.addElement(15);
     linkedList11.print();
 
-    //linkedList11.arrangeOddAndEven();
+    linkedList11.arrangeOddAndEven();
     //10,3,15,20,7
     linkedList11.print();
     cout << "*************list12 and list13****************" << endl;
@@ -306,19 +306,41 @@ int main()
     linkedList12.insertAlternate(linkedList13);
     linkedList12.print();
 
-    cout << "*****************************" << endl;
+    cout << "************list 14*****************" << endl;
     LinkedListV2 linkedList14;
     LinkedListV2 linkedList15;
 
-    linkedList14.addElement(1);
-    linkedList14.addElement(2);
-    linkedList14.addElement(3);
+    linkedList14.addElement(9);
+    linkedList14.addElement(6);
+    linkedList14.addElement(5);
 
+    linkedList15.addElement(8);
+    linkedList15.addElement(7);
+    linkedList15.addElement(6);
     linkedList15.addElement(4);
     linkedList15.addElement(5);
-    linkedList15.addElement(3);
+    linkedList15.addElement(7);
+    linkedList15.addElement(8);
+    linkedList15.addElement(9);
 
     linkedList14.addNumber(linkedList15);
+    linkedList14.print();
+
+    cout << "**************linked 16***************" << endl;
+    LinkedListV2 linkedList16;
+
+    linkedList16.addElement(1);
+    linkedList16.addElement(1);
+    linkedList16.addElement(5);
+    linkedList16.addElement(2);
+    linkedList16.addElement(2);
+    linkedList16.addElement(2);
+    linkedList16.addElement(3);
+    linkedList16.print();
+
+    cout << "************removeAllRepeated*****************" << endl;
+    linkedList16.removeAllRepeated();
+    linkedList16.print();
 
     return 0;
 }
