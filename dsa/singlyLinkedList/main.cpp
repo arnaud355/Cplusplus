@@ -342,5 +342,22 @@ int main()
     linkedList16.removeAllRepeated();
     linkedList16.print();
 
+    cout << "**************linked 17***************" << endl;
+    LinkedListV2 linkedList17;
+
+    linkedList17.addElement(1);
+    linkedList17.addElement(2);
+    linkedList17.addElement(3);
+    linkedList17.addElement(4);
+    linkedList17.addElement(5);
+    linkedList17.addElement(6);
+    //linkedList17.addElement(7);
+
+    linkedList17.print();
+
+    cout << "**************reverse chain***************" << endl;
+    linkedList17.reverseChain(3);
+    linkedList17.print();
+
     return 0;
 }

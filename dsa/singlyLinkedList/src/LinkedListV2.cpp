@@ -3,6 +3,7 @@
 #include <iostream>
 #include <list>
 #include <limits.h>
+#include <cmath>
 
 LinkedListV2::LinkedListV2(): head(nullptr), tail(nullptr)
 {
@@ -846,8 +847,13 @@ void LinkedListV2::removeAllRepeated(){
         i++;
     }
 
-    this->purgeListNodeFromTo(linkedListExistingValues.getLength() + 1, this->getLength());
+    std::cout << "++++++++++++++++++++++++++++++" << std::endl;
+    std::cout << linkedListExistingValues.getLength() << std::endl;
+    std::cout << this->getLength() << std::endl;
+    std::cout << "++++++++++++++++++++++++++++++" << std::endl;
 
+    this->purgeListNodeFromTo(linkedListExistingValues.getLength() + 1, this->getLength());//3 ; 7
+;
     //std::cout << "++++++++++++++++++++++++++++++" << std::endl;
     //linkedListExistingValues.print();
     //std::cout << "++++++++++++++++++++++++++++++" << std::endl;
@@ -875,7 +881,8 @@ void LinkedListV2::purgeListNodeFromTo(int idxStart, int idxEnd){
 
     if(head != nullptr){
         if(idxEnd > idxStart){
-             while(idxStart != idxEnd){
+             while(idxStart <= idxEnd){
+
                 if(idxStart == 1){
                     nextNode = this->get_nth(2);
                     currentNode = this->getHead();
@@ -883,14 +890,16 @@ void LinkedListV2::purgeListNodeFromTo(int idxStart, int idxEnd){
 
                     delete currentNode;
                     currentNode = nullptr;
+                    this->setLength(-1);
                 }
-                else if(idxStart == this->getLength()){
+                else if(idxStart == idxEnd){
                     previousNode = this->get_nth(this->getLength() - 1);
                     currentNode = this->getTail();
                     previousNode->next = nullptr;
 
                     delete currentNode;
                     currentNode = nullptr;
+                    this->setLength(-1);
                 }
                 else{
                     previousNode = this->get_nth(idxStart - 1);
@@ -901,9 +910,10 @@ void LinkedListV2::purgeListNodeFromTo(int idxStart, int idxEnd){
 
                     delete currentNode;
                     currentNode = nullptr;
+                    this->setLength(-1);
                 }
 
-                idxStart++;
+                idxEnd = this->getLength();
             }
         }
         else if(idxEnd == idxStart){
@@ -911,6 +921,136 @@ void LinkedListV2::purgeListNodeFromTo(int idxStart, int idxEnd){
         }
         else{
             std::cout << "invalid" << std::endl;
+        }
+    }
+}
+//1,2,3,4,5,6 with k = 6 : 6,5,4,3,2,1  ; 1,2,3,4,5,6 with k = 3 : 3,2,1,6,5,4
+//1,2,3,4,5,6,7 with k = 2 : 2,1,4,3,6,5,7
+void LinkedListV2::reverseChain(int k){
+
+    if(k == this->getLength()){
+        Node* lastNode = nullptr;
+        Node* nextNode = nullptr;
+        lastNode = getTail();
+        int i = 0;
+        i = this->getLength() - 1;
+
+        while(i >= 2){
+            nextNode = get_nth(i);
+
+            if(i == this->getLength() - 1){
+                lastNode->next = nextNode;
+                nextNode->next = get_nth(i - 1);
+            }
+            else if(i == 2){
+                nextNode->next = get_nth(i - 1);
+                nextNode->next->next = nullptr;
+            }
+            else{
+                nextNode->next = get_nth(i - 1);
+            }
+            i--;
+        }
+        head = lastNode;
+    }
+    else if(k <= 1){
+        std::cout << "No actions available" << std::endl;
+    }
+    else{
+        int round = std::round(this->getLength() / k);
+        bool firstRound = true;
+        bool lastRound = false;
+        Node* curNode = nullptr;
+        Node* nextNode = nullptr;
+        Node* curHead = nullptr;
+        Node* nodeToRelink = nullptr;
+        int v = 1;
+        int borneMin = 0;
+        int borneMax = 0;
+
+        while(round > 0){
+            if(firstRound){
+
+                nodeToRelink = get_nth(k * v + 1);
+                curHead = get_nth(k);
+
+                for(int i = k; i >= 2; i--){
+                    curNode = get_nth(i);
+                    nextNode = get_nth(i - 1);
+
+                    if(nextNode == head){
+                        curNode->next = nextNode;
+                        nextNode->next = nodeToRelink;
+                    }
+                    else{
+                        curNode->next = nextNode;
+                    }
+                }
+
+                //std::cout << "3 :" << curHead->m_data << std::endl;
+                head = curHead;
+                firstRound = false;
+            }
+            else{
+
+                if(lastRound){
+
+                    borneMin = k * v - k + 1;
+                    borneMax = k * v;
+                    int RemainNodes = this->getLength() - borneMax;
+                    int j = this->getLength();
+                    int a = 1;
+
+                    for(int i = borneMax; i >= borneMin; i--){
+                        curNode = get_nth(i);
+                        nextNode = get_nth(i - 1);
+
+                        if(i == borneMin && RemainNodes == 0){
+                            nextNode->next = get_nth(borneMax);
+                            curNode->next = nullptr;
+                        }
+                        else(i == borneMin && RemainNodes > 0){
+                            while(j > borneMax){
+                                // to do
+                                curNode
+                                nextNode->next = get_nth(borneMax + a);
+                                curNode->next = this->getTail();
+                                j--;
+                                a++;
+                            }
+
+                        }
+                        else{
+                            curNode->next = nextNode;
+                        }
+                    }
+
+                }
+                else{
+                    // to do
+                    nodeToRelink = get_nth(k * v + 1);
+                    borneMin = k * v - k + 1;
+                    borneMax = k * v;
+
+                    for(int i = borneMax; i >= borneMin; i--){
+                        curNode = get_nth(i);
+                        nextNode = get_nth(i - 1);
+
+                        if(i == borneMin){
+                            curNode->next = nextNode;
+                            nextNode->next = nodeToRelink;
+                        }
+                        else{
+                            curNode->next = nextNode;
+                        }
+                    }
+                }
+            }
+            round--;
+            v++;
+            if(round == 1){
+                lastRound = true;
+            }
         }
     }
 }

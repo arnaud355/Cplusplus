@@ -45,6 +45,7 @@ class LinkedListV2
         void replaceValueOfNode(int value, int idx);
         int getData(int idx) const;
         void purgeListNodeFromTo(int idxStart, int idxEnd);
+        void reverseChain(int k);
 
     protected:
 
