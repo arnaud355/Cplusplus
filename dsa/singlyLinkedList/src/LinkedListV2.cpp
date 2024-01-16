@@ -964,15 +964,18 @@ void LinkedListV2::reverseChain(int k){
         Node* nextNode = nullptr;
         Node* curHead = nullptr;
         Node* nodeToRelink = nullptr;
+        Node* remainNodes = nullptr;
         int v = 1;
         int borneMin = 0;
         int borneMax = 0;
+        int start = 0;
 
         while(round > 0){
             if(firstRound){
 
                 nodeToRelink = get_nth(k * v + 1);
                 curHead = get_nth(k);
+                start = k * v + 1;
 
                 for(int i = k; i >= 2; i--){
                     curNode = get_nth(i);
@@ -981,6 +984,21 @@ void LinkedListV2::reverseChain(int k){
                     if(nextNode == head){
                         curNode->next = nextNode;
                         nextNode->next = nodeToRelink;
+
+                        for(int j = start; j <= this->getLength(); j++){
+                            if(j == start){
+                                nodeToRelink->next = get_nth(j + 1);
+                            }
+                            else{
+                                remainNodes = get_nth(j);
+                                if(remainNodes->next == nullptr){
+                                    remainNodes->next = nullptr;
+                                }
+                                else{
+                                    remainNodes->next = get_nth(j + 1);
+                                }
+                            }
+                        }
                     }
                     else{
                         curNode->next = nextNode;
@@ -990,6 +1008,12 @@ void LinkedListV2::reverseChain(int k){
                 //std::cout << "3 :" << curHead->m_data << std::endl;
                 head = curHead;
                 firstRound = false;
+
+                for(Node* cur = head; cur; cur = cur->next){
+                    std::cout << "+++++++++++lala+++++++++++++++" << std::endl;
+                    std::cout << cur->m_data << std::endl;
+                    std::cout << "++++++++++++++++++++++++++" << std::endl;
+                }
             }
             else{
 
@@ -1006,15 +1030,23 @@ void LinkedListV2::reverseChain(int k){
                         nextNode = get_nth(i - 1);
 
                         if(i == borneMin && RemainNodes == 0){
-                            nextNode->next = get_nth(borneMax);
                             curNode->next = nullptr;
                         }
-                        else(i == borneMin && RemainNodes > 0){
+                        else if(i == borneMin && RemainNodes > 0){
+
                             while(j > borneMax){
-                                // to do
-                                curNode
-                                nextNode->next = get_nth(borneMax + a);
-                                curNode->next = this->getTail();
+
+                                if((borneMax + a) <= this->getLength()){
+                                    nextNode = get_nth(borneMax + a);
+                                    curNode->next = nextNode;
+                                }
+
+                                curNode = get_nth(borneMax + a);
+
+                                if(curNode->next != nullptr){
+                                    curNode->next = nullptr;
+                                }
+
                                 j--;
                                 a++;
                             }
@@ -1031,6 +1063,7 @@ void LinkedListV2::reverseChain(int k){
                     nodeToRelink = get_nth(k * v + 1);
                     borneMin = k * v - k + 1;
                     borneMax = k * v;
+                    start = k * v + 1;
 
                     for(int i = borneMax; i >= borneMin; i--){
                         curNode = get_nth(i);
@@ -1039,6 +1072,21 @@ void LinkedListV2::reverseChain(int k){
                         if(i == borneMin){
                             curNode->next = nextNode;
                             nextNode->next = nodeToRelink;
+
+                            for(int j = start; j <= this->getLength(); j++){
+                                if(j == start){
+                                    nodeToRelink->next = get_nth(j + 1);
+                                }
+                                else{
+                                    remainNodes = get_nth(j);
+                                    if(remainNodes->next == nullptr){
+                                        remainNodes->next = nullptr;
+                                    }
+                                    else{
+                                        remainNodes->next = get_nth(j + 1);
+                                    }
+                                }
+                            }
                         }
                         else{
                             curNode->next = nextNode;

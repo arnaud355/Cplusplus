@@ -22,7 +22,7 @@
 1705309567 c:\users\arnau\documents\cpp\dsa\singlylinkedlist\linkedlistv2.h
 	"struct.h"
 
-1705331181 source:c:\users\arnau\documents\cpp\dsa\singlylinkedlist\src\linkedlistv2.cpp
+1705397790 source:c:\users\arnau\documents\cpp\dsa\singlylinkedlist\src\linkedlistv2.cpp
 	"../LinkedListV2.h"
 	"../struct.h"
 	<iostream>
