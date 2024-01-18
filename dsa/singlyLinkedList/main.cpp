@@ -351,7 +351,8 @@ int main()
     linkedList17.addElement(4);
     linkedList17.addElement(5);
     linkedList17.addElement(6);
-    //linkedList17.addElement(7);
+    linkedList17.addElement(7);
+    linkedList17.addElement(8);
 
     linkedList17.print();
 

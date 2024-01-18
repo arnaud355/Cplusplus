@@ -505,8 +505,8 @@ void LinkedListV2::moveBack(int key = 1){
     for(Node* cur = head; cur; cur = cur->next){
         if(key == cur->m_data){
             counter++;
-            listIdx.push_back(i);
-        }
+
+        }listIdx.push_back(i);
         i++;
     }
 
@@ -853,7 +853,7 @@ void LinkedListV2::removeAllRepeated(){
     std::cout << "++++++++++++++++++++++++++++++" << std::endl;
 
     this->purgeListNodeFromTo(linkedListExistingValues.getLength() + 1, this->getLength());//3 ; 7
-;
+
     //std::cout << "++++++++++++++++++++++++++++++" << std::endl;
     //linkedListExistingValues.print();
     //std::cout << "++++++++++++++++++++++++++++++" << std::endl;
@@ -957,148 +957,140 @@ void LinkedListV2::reverseChain(int k){
         std::cout << "No actions available" << std::endl;
     }
     else{
+
         int round = std::round(this->getLength() / k);
-        bool firstRound = true;
-        bool lastRound = false;
-        Node* curNode = nullptr;
-        Node* nextNode = nullptr;
-        Node* curHead = nullptr;
-        Node* nodeToRelink = nullptr;
-        Node* remainNodes = nullptr;
-        int v = 1;
-        int borneMin = 0;
-        int borneMax = 0;
-        int start = 0;
 
-        while(round > 0){
-            if(firstRound){
+        //if not nodes remaining, size of 8, k = 3, remain 2 nodes
+        if(this->getLength() % (k * round) == 0){
 
-                nodeToRelink = get_nth(k * v + 1);
-                curHead = get_nth(k);
-                start = k * v + 1;
+            Node* curNode = nullptr;
+            int v = 1;
+            int borneMin, borneMax = 0;
+            int idx = 0;
 
-                for(int i = k; i >= 2; i--){
+            std::list<int> listAdd{};
+
+            while(round > 0){
+                borneMin = k * v - k;
+                borneMax = k * v;
+
+                for(int i = borneMax; i > borneMin; i--){
                     curNode = get_nth(i);
-                    nextNode = get_nth(i - 1);
+                    listAdd.push_back(curNode->m_data);
+                }
+                round--;
+                v++;
+            }
 
-                    if(nextNode == head){
-                        curNode->next = nextNode;
-                        nextNode->next = nodeToRelink;
+            for (const auto &ele : listAdd) {
+                //std::cout << "Index " << idx << ": " << ele << std::endl;
+                this->replaceValueOfNode(ele, idx + 1);
+                idx++;
+            }
 
-                        for(int j = start; j <= this->getLength(); j++){
-                            if(j == start){
-                                nodeToRelink->next = get_nth(j + 1);
-                            }
-                            else{
-                                remainNodes = get_nth(j);
-                                if(remainNodes->next == nullptr){
-                                    remainNodes->next = nullptr;
-                                }
-                                else{
-                                    remainNodes->next = get_nth(j + 1);
-                                }
-                            }
+        }
+        else{
+
+            Node* curNode = nullptr;
+            int v = 1;
+            int borneMin, borneMax = 0;
+            int idx = 0;
+            int laps = round;
+            std::list<int> listAdd{};
+
+            while(laps > 0){
+                borneMin = k * v - k;
+                borneMax = k * v;
+
+                for(int i = borneMax; i > borneMin; i--){
+                    curNode = get_nth(i);
+                    listAdd.push_back(curNode->m_data);
+                }
+                laps--;
+                v++;
+            }
+
+            borneMax = k * round + 1;
+
+            for(int j = borneMax; j <= this->getLength(); j++){
+                curNode = get_nth(j);
+                listAdd.push_back(curNode->m_data);
+            }
+
+            for (const auto &ele : listAdd) {
+                //std::cout << "Index " << idx << ": " << ele << std::endl;
+                this->replaceValueOfNode(ele, idx + 1);
+                idx++;
+            }
+
+        }
+
+        /*
+        //if not nodes remaining, size of 8, k = 3, remain 2 nodes
+        if(this->getLength() % (k * round) == 0){
+
+            int i,u,v = 1;
+            int range = 0;
+            int kLaps = 1;
+            int j = k;
+            Node* futurNodeHead = get_nth(k);
+            Node* startNode = nullptr;
+            Node* nextNode = nullptr;
+            bool beginSerieK = true;
+
+            for(Node* cur = head; cur; cur = cur->next){
+                range = k * v;
+
+                if(beginSerieK){
+                    j = range;
+                    startNode = get_nth(range);
+                    nextNode = get_nth(range - 1);
+
+                    startNode->next = nextNode;
+                    beginSerieK = false;
+                }
+                else{
+
+                    startNode = get_nth(j);
+
+                    if(j == 1){
+                        u = v + 1;
+                        nextNode = get_nth(k * u);
+                    }
+                    else{
+                        nextNode = get_nth(j - 1);
+                    }
+
+
+                    if(startNode == head){
+                        startNode->next = nextNode;
+                    }
+                    else if(nextNode == get_nth(k * (v - 1)) && kLaps > 1){
+                        if(kLaps == round){
+                            //we reach the last node in the last k serie : 321 654 : 6 -> 1
+                            startNode->next = nullptr;
+                            break;
                         }
                     }
                     else{
-                        curNode->next = nextNode;
-                    }
-                }
-
-                //std::cout << "3 :" << curHead->m_data << std::endl;
-                head = curHead;
-                firstRound = false;
-
-                for(Node* cur = head; cur; cur = cur->next){
-                    std::cout << "+++++++++++lala+++++++++++++++" << std::endl;
-                    std::cout << cur->m_data << std::endl;
-                    std::cout << "++++++++++++++++++++++++++" << std::endl;
-                }
-            }
-            else{
-
-                if(lastRound){
-
-                    borneMin = k * v - k + 1;
-                    borneMax = k * v;
-                    int RemainNodes = this->getLength() - borneMax;
-                    int j = this->getLength();
-                    int a = 1;
-
-                    for(int i = borneMax; i >= borneMin; i--){
-                        curNode = get_nth(i);
-                        nextNode = get_nth(i - 1);
-
-                        if(i == borneMin && RemainNodes == 0){
-                            curNode->next = nullptr;
-                        }
-                        else if(i == borneMin && RemainNodes > 0){
-
-                            while(j > borneMax){
-
-                                if((borneMax + a) <= this->getLength()){
-                                    nextNode = get_nth(borneMax + a);
-                                    curNode->next = nextNode;
-                                }
-
-                                curNode = get_nth(borneMax + a);
-
-                                if(curNode->next != nullptr){
-                                    curNode->next = nullptr;
-                                }
-
-                                j--;
-                                a++;
-                            }
-
-                        }
-                        else{
-                            curNode->next = nextNode;
-                        }
+                        startNode->next = nextNode;
                     }
 
                 }
-                else{
-                    // to do
-                    nodeToRelink = get_nth(k * v + 1);
-                    borneMin = k * v - k + 1;
-                    borneMax = k * v;
-                    start = k * v + 1;
-
-                    for(int i = borneMax; i >= borneMin; i--){
-                        curNode = get_nth(i);
-                        nextNode = get_nth(i - 1);
-
-                        if(i == borneMin){
-                            curNode->next = nextNode;
-                            nextNode->next = nodeToRelink;
-
-                            for(int j = start; j <= this->getLength(); j++){
-                                if(j == start){
-                                    nodeToRelink->next = get_nth(j + 1);
-                                }
-                                else{
-                                    remainNodes = get_nth(j);
-                                    if(remainNodes->next == nullptr){
-                                        remainNodes->next = nullptr;
-                                    }
-                                    else{
-                                        remainNodes->next = get_nth(j + 1);
-                                    }
-                                }
-                            }
-                        }
-                        else{
-                            curNode->next = nextNode;
-                        }
-                    }
+                j--;
+                i++;
+                if(i > k){
+                    i = 1;
+                    v++;
+                    beginSerieK = true;
+                    kLaps++;
                 }
             }
-            round--;
-            v++;
-            if(round == 1){
-                lastRound = true;
-            }
+            head = futurNodeHead;
         }
+        else{
+
+        }*/
+
     }
 }
