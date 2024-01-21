@@ -1,1 +1,5 @@
-tasks           date                  done O/N
+tasks          		date         done O/N
+
+arrangeOddAndEven()     10 jan        O
+
+reverveChain()          18 jan        O
