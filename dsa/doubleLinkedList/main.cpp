@@ -70,7 +70,28 @@ int main()
     cout << listDouble5.isPalindrome() << endl;
     cout << listDouble5.findMiddle() << endl;
 
+    cout << "***********swap***************" << endl;
+    DoubleLinkedList listDouble6;
+    listDouble6.insertEnd(6);
+    listDouble6.insertEnd(10);
+    listDouble6.insertEnd(8);
+    listDouble6.insertEnd(15);
+    listDouble6.print();
     cout << "**************************" << endl;
+    listDouble6.swapForwardWithBackward(2);
+    listDouble6.print();
+
+    cout << "***********reverse***************" << endl;
+    DoubleLinkedList listDouble7;
+    listDouble7.insertEnd(1);
+    listDouble7.insertEnd(2);
+    listDouble7.insertEnd(3);
+    listDouble7.insertEnd(4);
+    listDouble7.insertEnd(5);
+    listDouble7.print();
+    cout << "**************************" << endl;
+    listDouble7.reverseAllNodesAddresses();
+    listDouble7.print();
 
     return 0;
 }

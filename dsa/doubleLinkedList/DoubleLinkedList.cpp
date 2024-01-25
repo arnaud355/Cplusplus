@@ -321,13 +321,118 @@ int DoubleLinkedList::findMiddle(){
 }
 //swap; for example if k = 1, swap first and last, k = 2, swap second and before last
 void DoubleLinkedList::swapForwardWithBackward(int k){
-    if(k >= this->getLength()){
+    if(k <= 0 || k >= this->getLength()){
         std::cout << "no available" << std::endl;
     }
     else{
+        if(head != nullptr){
+            if(k == 1){
+                //dans ce cas traitement head et tail
+                Node* forwardNode = this->get_nth(k);
+                Node* backwardNode = this->get_nth(this->getLength() - k + 1);
 
+                Node* afterForwardNode = this->get_nth(2);
+                Node* beforeBackwardNode = this->get_nth(this->getLength() - 1);
+
+                backwardNode->next = afterForwardNode;
+                afterForwardNode->prev = backwardNode;
+                backwardNode->prev = nullptr;
+
+                beforeBackwardNode->next = forwardNode;
+                forwardNode->prev = beforeBackwardNode;
+                forwardNode->next = nullptr;
+
+                head = backwardNode;
+                tail = forwardNode;
+
+            }
+            else if(k == this->getLength() - 1){
+                //dans ce cas traitement tail
+                Node* forwardNode = this->get_nth(k);
+                Node* beforeForwardNode = this->get_nth(k - 1);
+                Node* backwardNode = this->get_nth(this->getLength());
+
+                backwardNode->next = forwardNode;
+                forwardNode->prev = backwardNode;
+
+                beforeForwardNode->next = backwardNode;
+                backwardNode->prev = beforeForwardNode;
+
+
+                forwardNode->next = nullptr;
+                tail = forwardNode;
+            }
+            else{
+                Node* forwardNode = this->get_nth(k);
+                Node* backwardNode = this->get_nth(this->getLength() - k + 1);
+
+                Node* beforeForwardNode = this->get_nth(k - 1);
+                Node* afterBackwardNode = this->get_nth(this->getLength() - k + 2);
+
+                beforeForwardNode->next = backwardNode;
+                backwardNode->prev = beforeForwardNode;
+
+                backwardNode->next = forwardNode;
+                forwardNode->prev = backwardNode;
+
+                forwardNode->next = afterBackwardNode;
+                afterBackwardNode->prev = forwardNode;
+
+                if(afterBackwardNode == this->get_nth(this->getLength())){
+                    afterBackwardNode->next = nullptr;
+                }
+            }
+        }
     }
 }
+
+void DoubleLinkedList::reverseAllNodesAddresses(){
+
+    if(head != nullptr && this->getLength() > 1){
+        int sizeArr = this->getLength();
+        //adresse prev du node est perdu, il faut grader trace des adresses
+        Node* arrayOfPointers[sizeArr];
+        int i = this->getLength();
+        Node* lastNode = nullptr;
+        Node* nextNode = nullptr;
+
+        for(Node* cur = head; cur; cur = cur->next){
+            for (int i = 0; i < sizeArr; ++i) {
+                arrayOfPointers[i] = cur;
+            }
+        }
+
+        while(i > 0){
+
+            if(i == 1){
+                lastNode = arrayOfPointers[i];
+
+                //the current head become the tail
+                tail = lastNode;
+                tail->next = nullptr;
+            }
+            else{
+                lastNode = arrayOfPointers[i];
+                nextNode = arrayOfPointers[i - 1];
+
+                lastNode->next = nextNode;
+                nextNode->prev = lastNode;
+            }
+
+            i--;
+        }
+
+        head = arrayOfPointers[this->getLength()];
+        head->prev = nullptr;
+
+         // Delete for avoid memory leaks
+        for (int v = 0; v < sizeArr; ++v) {
+            delete arrayOfPointers[v];
+        }
+    }
+
+}
+
 //************test************************************************************
 void DoubleLinkedList::debug_add_node(Node* node) {
     debug_data.push_back(node);

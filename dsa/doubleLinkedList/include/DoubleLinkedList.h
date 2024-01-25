@@ -58,6 +58,7 @@ class DoubleLinkedList
         bool isPalindrome();
         int findMiddle();
         void swapForwardWithBackward(int k);
+        void reverseAllNodesAddresses();
         void debug_print_address();
         void debug_print_node(Node* node, bool is_seperate);
         void debug_print_list(std::string msg);
