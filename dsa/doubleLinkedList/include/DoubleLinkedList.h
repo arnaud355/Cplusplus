@@ -37,6 +37,8 @@ class DoubleLinkedList
         //DoubleLinkedList &operator=(const DoubleLinkedList &another);
         void print();
         Node* get_nth(int n) const;
+        Node* getHead() const;
+        Node* getTail() const;
         int getLength () const;
         int getData(int idx) const;
         void printReversed();
@@ -59,6 +61,7 @@ class DoubleLinkedList
         int findMiddle();
         void swapForwardWithBackward(int k);
         void reverseAllNodesAddresses();
+        void merge2SortedLists(DoubleLinkedList& other);
         void debug_print_address();
         void debug_print_node(Node* node, bool is_seperate);
         void debug_print_list(std::string msg);

@@ -33,6 +33,14 @@ Node* DoubleLinkedList::get_nth(int n) const {
     return nullptr;
 }
 
+Node* DoubleLinkedList::getHead() const{
+     return head;
+}
+
+Node* DoubleLinkedList::getTail() const {
+    return tail;
+}
+
 int DoubleLinkedList::getLength () const {
     return length;
 }
@@ -389,50 +397,76 @@ void DoubleLinkedList::swapForwardWithBackward(int k){
 void DoubleLinkedList::reverseAllNodesAddresses(){
 
     if(head != nullptr && this->getLength() > 1){
-        int sizeArr = this->getLength();
-        //adresse prev du node est perdu, il faut grader trace des adresses
-        Node* arrayOfPointers[sizeArr];
+
         int i = this->getLength();
         Node* lastNode = nullptr;
         Node* nextNode = nullptr;
 
-        for(Node* cur = head; cur; cur = cur->next){
-            for (int i = 0; i < sizeArr; ++i) {
-                arrayOfPointers[i] = cur;
-            }
-        }
+        while(i > 1){
 
-        while(i > 0){
+            lastNode = this->get_nth(i);
+            nextNode = this->get_nth(i - 1);
 
-            if(i == 1){
-                lastNode = arrayOfPointers[i];
-
-                //the current head become the tail
-                tail = lastNode;
-                tail->next = nullptr;
-            }
-            else{
-                lastNode = arrayOfPointers[i];
-                nextNode = arrayOfPointers[i - 1];
-
-                lastNode->next = nextNode;
-                nextNode->prev = lastNode;
-            }
+            lastNode->next = nextNode;
+            //nextNode->prev = lastNode;
 
             i--;
         }
 
-        head = arrayOfPointers[this->getLength()];
+        head = this->get_nth(this->getLength());
         head->prev = nullptr;
 
-         // Delete for avoid memory leaks
-        for (int v = 0; v < sizeArr; ++v) {
-            delete arrayOfPointers[v];
-        }
+         //the current head become the tail
+        tail = this->get_nth(1);
+        tail->next = nullptr;
     }
 
 }
 
+//les listes sont déjà triée par ordre croissant
+void DoubleLinkedList::merge2SortedLists(DoubleLinkedList& other){
+    if(this->getHead() == nullptr || other.getHead() == nullptr){
+        std::cout << "One, or two lists don t exist" << std::endl;
+    }
+    else if(this->getLength() == 1 && other.getLength() == 1){
+        if(other.getData(1) <= this->getData(1)){
+            this->insertFront(other.getData(1));
+        }
+        else{
+            this->insertEnd(other.getData(1));
+        }
+    }
+    else{
+
+        int val = 0;
+
+        for(Node* cur = other.getHead(); cur; cur = cur->next){
+            val = cur->m_data;
+                for(Node* cur2 = head; cur2; cur2 = cur2->next){
+                    if(val <= cur2->m_data){
+                        if(cur2 == this->getHead()){
+                            this->insertFront(val);
+                            break;
+                        }
+                        else if(cur2 == this->getTail()){
+                            this->insertEnd(val);
+                            break;
+                        }
+                        else {
+                            this->embedAfter(cur2->prev, val);
+                            break;
+                        }
+                    }
+
+                    if(val > cur2->m_data && cur2 == this->getTail()){
+                        this->insertEnd(val);
+                        break;
+                    }
+                }
+            }
+
+        }
+}
 //************test************************************************************
 void DoubleLinkedList::debug_add_node(Node* node) {
     debug_data.push_back(node);

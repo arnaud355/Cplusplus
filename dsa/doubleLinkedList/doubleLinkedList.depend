@@ -1,9 +1,9 @@
 # depslib dependency file v1.0
-1706193163 source:c:\users\arnau\documents\cpp\dsa\doublelinkedlist\main.cpp
+1706289533 source:c:\users\arnau\documents\cpp\dsa\doublelinkedlist\main.cpp
 	<iostream>
 	"DoubleLinkedList.h"
 
-1706190805 c:\users\arnau\documents\cpp\dsa\doublelinkedlist\include\doublelinkedlist.h
+1706279936 c:\users\arnau\documents\cpp\dsa\doublelinkedlist\include\doublelinkedlist.h
 	<iostream>
 	<vector>
 	<cassert>
@@ -11,7 +11,7 @@
 	<algorithm>
 	<sstream>
 
-1706193146 source:c:\users\arnau\documents\cpp\dsa\doublelinkedlist\doublelinkedlist.cpp
+1706287407 source:c:\users\arnau\documents\cpp\dsa\doublelinkedlist\doublelinkedlist.cpp
 	"DoubleLinkedList.h"
 	<list>
 	<cmath>

@@ -93,5 +93,25 @@ int main()
     listDouble7.reverseAllNodesAddresses();
     listDouble7.print();
 
+    cout << "***********merge 2 lists***************" << endl;
+    DoubleLinkedList listDouble8;
+    DoubleLinkedList listDouble9;
+
+    listDouble8.insertEnd(10);
+    listDouble8.insertEnd(20);
+    listDouble8.insertEnd(30);
+    //listDouble8.insertEnd(40);
+    //listDouble8.insertEnd(50);
+
+    listDouble9.insertEnd(60);
+    listDouble9.insertEnd(65);
+    listDouble9.insertEnd(22);
+    listDouble9.insertEnd(24);
+    listDouble9.insertEnd(35);
+
+    listDouble8.merge2SortedLists(listDouble9);
+    listDouble8.print();
+
+
     return 0;
 }
