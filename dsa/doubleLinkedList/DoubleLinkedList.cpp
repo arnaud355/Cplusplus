@@ -399,25 +399,28 @@ void DoubleLinkedList::reverseAllNodesAddresses(){
     if(head != nullptr && this->getLength() > 1){
 
         int i = this->getLength();
-        Node* lastNode = nullptr;
+        //store hte first and last nodes for keep the track of their addresses
+        Node* lastNode = this->get_nth(i);
+        Node* firstNode = this->get_nth(1);
+        Node* curNode = nullptr;
         Node* nextNode = nullptr;
 
         while(i > 1){
 
-            lastNode = this->get_nth(i);
+            curNode = this->get_nth(i);
             nextNode = this->get_nth(i - 1);
 
-            lastNode->next = nextNode;
-            //nextNode->prev = lastNode;
+            curNode->next = nextNode;
+            nextNode->prev = curNode;
 
             i--;
         }
 
-        head = this->get_nth(this->getLength());
+        head = lastNode;
         head->prev = nullptr;
 
          //the current head become the tail
-        tail = this->get_nth(1);
+        tail = firstNode;
         tail->next = nullptr;
     }
 
