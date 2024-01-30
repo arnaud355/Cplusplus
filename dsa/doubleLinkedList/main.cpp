@@ -1,5 +1,6 @@
 #include <iostream>
 #include "DoubleLinkedList.h"
+#include "ArrayLinkedList.h"
 
 using namespace std;
 
@@ -112,6 +113,29 @@ int main()
     listDouble8.merge2SortedLists(listDouble9);
     listDouble8.print();
 
+     cout << "************ ArrayLinkedList**************" << endl;
+
+     ArrayLinkedList arrayL(10);
+     arrayL.setValue(50,5);
+     arrayL.setValue(20,2);
+     arrayL.setValue(70,7);
+     arrayL.setValue(40,4);
+     arrayL.setValue(6,0);
+     arrayL.printArray();
+
+     cout << "**************************" << endl;
+     arrayL.printArrayNonZero();
+     cout << arrayL.getValue(7) << endl;
+
+     cout << "**************************" << endl;
+     ArrayLinkedList arrayL2(10);
+     arrayL2.setValue(1,4);
+     arrayL2.setValue(3,7);
+     arrayL2.setValue(4,6);
+     arrayL2.printArrayNonZero();
+     cout << "**************************" << endl;
+     arrayL.addition(arrayL2);
+     arrayL.printArray();
 
     return 0;
 }
