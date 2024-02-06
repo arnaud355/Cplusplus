@@ -1,6 +1,7 @@
 #include <iostream>
 #include "DoubleLinkedList.h"
 #include "ArrayLinkedList.h"
+#include "SparseMatrix.h"
 
 using namespace std;
 
@@ -136,6 +137,9 @@ int main()
      cout << "**************************" << endl;
      arrayL.addition(arrayL2);
      arrayL.printArray();
+     cout << "************Matrix**************" << endl;
+     SparseMatrix mat(10, 10);
+     mat.testSparse();
 
     return 0;
 }

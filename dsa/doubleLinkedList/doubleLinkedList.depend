@@ -1,8 +1,9 @@
 # depslib dependency file v1.0
-1706632562 source:c:\users\arnau\documents\cpp\dsa\doublelinkedlist\main.cpp
+1707229758 source:c:\users\arnau\documents\cpp\dsa\doublelinkedlist\main.cpp
 	<iostream>
 	"DoubleLinkedList.h"
 	"ArrayLinkedList.h"
+	"SparseMatrix.h"
 
 1706279936 c:\users\arnau\documents\cpp\dsa\doublelinkedlist\include\doublelinkedlist.h
 	<iostream>
@@ -20,7 +21,23 @@
 1706632401 c:\users\arnau\documents\cpp\dsa\doublelinkedlist\include\arraylinkedlist.h
 	"DoubleLinkedList.h"
 
-1706632445 source:c:\users\arnau\documents\cpp\dsa\doublelinkedlist\arraylinkedlist.cpp
+1706633078 source:c:\users\arnau\documents\cpp\dsa\doublelinkedlist\arraylinkedlist.cpp
 	"ArrayLinkedList.h"
 	"DoubleLinkedList.h"
+
+1707227700 c:\users\arnau\documents\cpp\dsa\doublelinkedlist\include\sparsematrix.h
+	"DoubleLinkedList.h"
+	"ArrayLinkedList.h"
+	"LinkedList.h"
+	<vector>
+
+1707225701 c:\users\arnau\documents\cpp\dsa\doublelinkedlist\include\linkedlist.h
+	"DoubleLinkedList.h"
+
+1707225701 source:c:\users\arnau\documents\cpp\dsa\doublelinkedlist\src\linkedlist.cpp
+	"LinkedList.h"
+
+1707230438 source:c:\users\arnau\documents\cpp\dsa\doublelinkedlist\src\sparsematrix.cpp
+	"SparseMatrix.h"
+	<assert.h>
 

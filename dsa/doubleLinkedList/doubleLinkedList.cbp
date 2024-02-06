@@ -38,8 +38,10 @@
 		<Unit filename="DoubleLinkedList.cpp" />
 		<Unit filename="include/ArrayLinkedList.h" />
 		<Unit filename="include/DoubleLinkedList.h" />
+		<Unit filename="include/LinkedList.h" />
 		<Unit filename="include/SparseMatrix.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="src/LinkedList.cpp" />
 		<Unit filename="src/SparseMatrix.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
