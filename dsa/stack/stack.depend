@@ -1,11 +1,15 @@
 # depslib dependency file v1.0
-1707415994 source:c:\users\arnau\documents\cpp\dsa\stack\src\stack.cpp
+1709656577 source:c:\users\arnau\documents\cpp\dsa\stack\src\stack.cpp
 	"Stack.h"
+	<assert.h>
 
-1707238612 c:\users\arnau\documents\cpp\dsa\stack\include\stack.h
+1709655099 c:\users\arnau\documents\cpp\dsa\stack\include\stack.h
 	<iostream>
+	<string>
+	<vector>
+	<utility>
 
-1707415913 source:c:\users\arnau\documents\cpp\dsa\stack\main.cpp
+1709656526 source:c:\users\arnau\documents\cpp\dsa\stack\main.cpp
 	<iostream>
-	"Stack.h"
+	"include/Stack.h"
 

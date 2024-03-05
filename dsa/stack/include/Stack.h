@@ -1,6 +1,9 @@
 #ifndef STACK_H
 #define STACK_H
 #include <iostream>
+#include <string>
+#include <vector>
+#include <utility>
 
 struct Node {
     int m_data = 0;
@@ -18,12 +21,23 @@ class Stack
     public:
         Stack();
         Stack(int sizeStack);
+        Stack(int sizeStack, char letter);
         ~Stack();
         void push(int value);
-        void pop();
+        void push(char value);
+        int pop();
+        void popL();
         int peek();
         bool isFull();
         bool isEmpty();
+        void display();
+        void displayL();
+        std::string reverseSubwords(std::string line);
+        int getValue(int idx);
+        int reverseNum(int value);
+        std::vector<int> intToArray(int num);
+        bool isValid(std::string str);
+        void removeDuplicates(std::string s);
         //void setValueCounter(int val);
         //int getValueCounter();
         //int getSize();
@@ -33,9 +47,11 @@ class Stack
     private:
         //Node* head {};
         //Node* tail {};
-        int top {};
         int* arrayInt {};
+        char* arrayChar {};
         int m_sizeStack = 0;
+        char m_letter = ' ';
+        int added_elements {};
         //int valueCounter = 0;
 };
 

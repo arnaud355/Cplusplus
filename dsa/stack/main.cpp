@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Stack.h"
+#include "include/Stack.h"
 
 using namespace std;
 
@@ -11,9 +11,21 @@ int main()
     stk.push(30);
 
     cout << stk.isFull() << endl;
-    cout << stk.peek() << endl;
-    stk.pop();
+    cout << "peek : " << stk.peek() << endl;
+    //stk.pop();
     cout << stk.isFull() << endl;
+    cout << "**********************" << endl;
+    stk.display();
+
+    cout << stk.reverseSubwords("abc d efg xy") << endl;
+    cout << stk.reverseNum(1234) << endl;
+
+    Stack stkParentheses(1,'a');
+
+    cout << "Is valid parenthese : " << stkParentheses.isValid("([])") << endl;
+    cout << "Is valid parenthese : " << stkParentheses.isValid("([})") << endl;
+
+    stkParentheses.removeDuplicates("abbaca");
 
     return 0;
 }
